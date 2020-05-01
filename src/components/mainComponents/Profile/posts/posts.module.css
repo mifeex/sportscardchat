@@ -1,0 +1,19 @@
+.content {
+	grid-area: c;
+	background-color: cornflowerblue;
+}
+
+.info_title {
+	padding: 30px 0 20px 0!important;
+    text-align: left!important;
+    color: #4C4C4C!important;
+}
+
+.strong {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.paginationSpan {
+	cursor: pointer;
+}

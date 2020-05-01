@@ -1,0 +1,47 @@
+.item img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.item a {
+	font-size: 29px;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.messag {
+	margin-left: 75px;
+	font-size: 18px;
+	color: #000;
+	font-family: Rubik, Helvetice, Arial, sans-serif;
+}
+
+.item {
+visibility: visible !important;
+-webkit-box-direction: normal;
+list-style: none;
+color: inherit;
+overflow-wrap: break-word;
+word-break: break-word;
+line-height: inherit;
+box-sizing: inherit;
+outline: 0;
+font-weight: inherit;
+font-style: inherit;
+font-size: 100%;
+font-family: inherit;
+vertical-align: baseline;
+margin: 0;
+position: relative;
+background: #fff;
+border: 1px solid #d8d8d8;
+border-left-width: 0;
+border-right-width: 0;
+padding: 18px 0!important;
+border-top-width: 0;
+padding-top: 0!important;
+}
+
+.Title {
+	
+}
