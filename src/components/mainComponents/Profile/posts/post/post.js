@@ -1,7 +1,6 @@
 import React from 'react';
-import s from './post.module.css';
 import {Link} from 'react-router-dom';
-
+import {faComment} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //component using for some render. Here will send category and post props. We need separate it
 const Post = (props) => {
@@ -26,11 +25,11 @@ const Post = (props) => {
   return (
     <li className="row">
       <dl className="icon ">
+      <FontAwesomeIcon icon={faComment} />
         <dt>
           <div className="list-inner">
             <Link className="forumtitle" to={path}>{postHeader}</Link>
-              <div className="responsive-show">
-                {props.postBody.length > 350 ? `${props.postBody.slice(0, 350)}...` : props.postBody}
+              <div className="responsive-show" dangerouslySetInnerHTML={{__html: props.postBody.length > 350 ? `${props.postBody.slice(0, 350)}...` : props.postBody}}>
               </div>             
           </div>
         </dt>

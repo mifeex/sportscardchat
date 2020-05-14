@@ -14,4 +14,4 @@ const mapStateToProps = state => {
 export default compose(
 		connect(mapStateToProps, {}),
 		withProfile,
-	)(Comments)
+	)()

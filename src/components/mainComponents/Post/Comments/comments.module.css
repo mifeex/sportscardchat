@@ -1,3 +1,8 @@
-.comment {
-	
+.newCommentBox {
+	margin: 10px 15px!important;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	font-size: 17px;
+	width: 75%!important;
+	height: 200px;
+	display: flex
 }

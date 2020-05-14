@@ -10,7 +10,7 @@ const categoriesReducer = (state = initialState, action) => {
 
 	const _addCategory = (category) => {
 		category.map(el => {
-			if (newState.categories.length < 5) {
+			if (newState.categories.length < 4) {
 				return newState.categories.push(el)
 			}
 		})

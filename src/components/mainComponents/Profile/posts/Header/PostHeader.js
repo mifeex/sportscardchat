@@ -1,7 +1,9 @@
 import React from 'react';
 import s from '../posts.module.css';
 import {Link} from 'react-router-dom';
-import * as axios from 'axios';
+import PostHeaderContext from './PostHeaderContext';
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //умная компанента. Умеет отрисовывать посты. 
 const PostHeader = props => {
 
@@ -15,27 +17,18 @@ const PostHeader = props => {
 	return (
 		<div className="action-bar top">
 			<div className="buttons">
-				<Link to="" className="button1 font-icon" title="Post a new topic">
-					<i className="fa fa-pencil"></i>New Topic
+				<Link to="/post/new" className="button1 font-icon">
+					<FontAwesomeIcon icon={faPencilAlt} /> New Topic
 				</Link>
 			</div>
 			
-			<div className="search-box" role="search">
-				<form method="get" id="forum-search">
-					<fieldset>
-						<input className="inputbox search" type="search" id="search_keywords" placeholder="Search this forum…" />
-						<button className="button" type="submit" title="Search">
-							<i className="fa fa-search"></i>
-						</button>
-					</fieldset>
-				</form>
-			</div>
-			
+			<PostHeaderContext />
+
 			<div className="pagination">
 				{props.totalPostCount} {props.totalPostCount > 1 ? 'topics ' : 'topic '}
 				• Page {
 					pages.map((el, key) => {
-						return <span key={key} onClick={() => {props.pageChange(el)}} className={`${props.page === el && s.strong } ${s.paginationSpan}`}>{el} </span>
+						return <button key={key} onClick={() => {props.pageChange(el)}} className={`${props.page === el && s.strong } ${s.paginationSpan}`}>{el}</button>
 					})
 				}
 				of <strong className={s.paginationSpan}>{pageCount}</strong>

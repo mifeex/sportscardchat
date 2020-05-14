@@ -1,53 +1,46 @@
 import React from 'react';
 import s from '../mainPostItems/post.module.css';
-import {Link} from 'react-router-dom';
-import UserStats from '../mainPostItems/UserStats'; // удалить в обязательном порядке!
-import Body from '../mainPostItems/Body'; // удалить в обязательном порядке!
+import UserStats from '../mainPostItems/UserStats';
+import Body from '../mainPostItems/Body';
 //тупая компонента.
 const Comments = (props) => {
+	return (
+		<div className='item'>
+			<div>
+				{///
+					props.element.map((ad, key) => {
+						return (
+							<div key={key}>
+								<div className={s.userItem}>{
+									<UserStats 
+											img={ad.img}
+											count={ad.count}
+											joined={ad.joined}
+											name={ad.username}
+											key={ad.userId}
+											userId={ad.userId}
+									/>
+								}</div>
 
-	const userData = props.comments.userData;
-	const commentsData = props.comments.commentsData;
-
-    return (
-    	<div className='item'>
-	    	<Link to="/">&#8592; back to main page</Link>
-	        <div>
-
-		        <div className={s.userItem}>
-			        {///
-			          userData.map(ud => {
-			            return (
-							<UserStats img={ud.img}
-									count={ud.count}
-									joined={ud.joined} 
-									name={ud.name}
-									id={ud.id}
-									key={ud.id}
-				            />
-			            )
-			          }) 
-			        }
-			    </div>
-
-			    <div className={s.bodyItem}>
-			        {///
-			          commentsData.map(cd => {
-			            return (
-							<Body tag={cd.tag}
-								text={cd.text} 
-								date={cd.date}
-								inReply={cd.inReply}
-								key={cd.id}
-								postId={cd.id}
-							/>            	
-			            )
-			          }) 
-			        }
-			    </div>
-	        </div>    
-        </div>
-  	)
+								<div className={s.bodyItem}>
+									{///
+										<Body 
+											tag={ad.tag}
+											text={ad.text}
+											date={ad.date}
+											inReply={props.inReply}
+											key={ad.postId}
+											postId={ad.postId}
+										/>
+									}
+								</div>
+							</div>
+						)
+					})
+				}
+			</div>
+		</div>
+	)
 }
 
 export default Comments;

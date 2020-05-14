@@ -1,8 +1,8 @@
 import instance from './instance';
 
 const hiddenAPI = {
-	_getLimitedPage: (limit, page, path, extraPath = '') => {
-		return instance.get(`${path}${extraPath}?limit=${limit}&page=${page}`)
+	_getLimitedPage: (limit, page, path, extraPath = '', additionalQuery = '') => {
+		return instance.get(`${path}${extraPath}?limit=${limit}&page=${page}${additionalQuery}`)
 		.then(res => {
 			return res.data
 		})

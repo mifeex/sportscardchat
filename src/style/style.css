@@ -13,6 +13,12 @@
 .site-nav > ul > li > a {
   color: #DDD;
 }
+.site-nav > ul > li > button {
+  color: #DDD;
+}
+.site-nav > ul > li > button:hover {
+  background-color: #25b695;
+}
 .site-nav > ul > li > a:hover {
   background-color: #25b695;
 }
@@ -798,7 +804,23 @@ ul.cplist {
   background-color: #F5F5F5;
   color: #536482;
 }
+#tabs .tab > button {
+  background-color: #F5F5F5;
+  color: #536482;
+}
+#tabs .tab > label {
+  background-color: #F5F5F5;
+  color: #536482;
+}
 #tabs .tab > a:hover {
+  background: #FFF;
+  color: #323a45;
+}
+#tabs .tab > button:hover {
+  background: #FFF;
+  color: #323a45;
+}
+#tabs .tab > label:hover {
   background: #FFF;
   color: #323a45;
 }
@@ -807,12 +829,26 @@ ul.cplist {
   background-color: #FFF;
   color: #323a45;
 }
+#tabs .activetab > button,
+#tabs .activetab > button:hover {
+  background-color: #FFF;
+  color: #323a45;
+}
 #tabs .activetab > a:hover {
+  color: #000000;
+}
+#tabs .activetab > button:hover {
   color: #000000;
 }
 /* Mini tabbed menu used in MCP
 ----------------------------------------*/
 #minitabs .tab > a {
+  background-color: #E1EBF2;
+}
+#minitabs .tab > button {
+  background-color: #E1EBF2;
+}
+#minitabs .tab > label {
   background-color: #E1EBF2;
 }
 #minitabs .activetab > a,
@@ -1022,38 +1058,44 @@ fieldset.quick-login input.inputbox {
 /* Form button styles
 ---------------------------------------- */
 a.button1,
-input.button1 {
+input.button1,
+button.button1 {
   background-color: #25b695;
   border-color: #25b695;
   color: #eaecf0;
 }
 a.button2,
-input.button2 {
+input.button2,
+button.button2 {
   background-color: #DDDFE3;
   border-color: #DDDFE3;
   color: #4C4C4C;
 }
 a.button3,
-input.button3 {
+input.button3,
+button.button3 {
   background-color: #323a45;
   border-color: #323a45;
   color: #eaecf0;
 }
 /* Hover states */
 a.button1:hover,
-input.button1:hover {
+input.button1:hover,
+button.button1:hover {
   background-color: #1f967b;
   border-color: #1f967b;
   color: #ffffff;
 }
 a.button2:hover,
-input.button2:hover {
+input.button2:hover,
+button.button2:hover {
   background-color: #D5D7DB;
   border-color: #D5D7DB;
   color: #4C4C4C;
 }
 a.button3:hover,
-input.button3:hover {
+input.button3:hover,
+button.button3:hover {
   color: #eaecf0;
 }
 /* Focus and active states */
@@ -3375,7 +3417,6 @@ fieldset.fields1 dt {
   border-right-width: 0;
 }
 fieldset.fields1 dd {
-  margin-left: 15em;
   border-left-width: 0;
 }
 fieldset.fields1 div {
@@ -3594,21 +3635,24 @@ input[type="search"]::-webkit-search-cancel-button {
   margin-left: 20px;
 }
 input.button1,
-input.button2 {
+input.button2,
+button.button1 {
   font-size: 1em;
 }
 a.button1,
 input.button1,
 input.button3,
 a.button2,
-input.button2 {
+input.button2,
+button.button1 {
   width: auto !important;
   height: 35px;
   padding: 0 20px;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 a.button1,
-input.button1 {
+input.button1,
+button.button1 {
   border: 1px solid transparent;
 }
 input.button3 {
@@ -3643,7 +3687,8 @@ a.button2:active,
 a.button3,
 a.button3:link,
 a.button3:visited,
-a.button3:active {
+a.button3:active,
+button.button1 {
   display: inline-block;
   text-decoration: none;
   padding: 0 20px;
@@ -3656,7 +3701,8 @@ a.button1:hover,
 input.button1:hover,
 a.button2:hover,
 input.button2:hover,
-input.button3:hover {
+input.button3:hover,
+button.button1:hover {
   border: 1px solid transparent;
   background-position: 0 100%;
 }
@@ -3666,7 +3712,8 @@ input.disabled {
 /* Focus states */
 input.button1:focus,
 input.button2:focus,
-input.button3:focus {
+input.button3:focus,
+button.button1:focus {
   outline-style: none;
 }
 /* Topic and forum Search */
@@ -4180,7 +4227,11 @@ ul.cplist {
   line-height: 14px;
 }
 #tabs .tab > a,
-#minitabs .tab > a {
+#minitabs .tab > a,
+#tabs .tab > button,
+#minitabs .tab > button,
+#tabs .tab > label,
+#minitabs .tab > label {
   display: block;
   padding: 0 20px;
   position: relative;
@@ -4202,6 +4253,18 @@ ul.cplist {
 #tabs .activetab > a {
   margin-top: 0;
 }
+#tabs .tab > button {
+  border: none;
+}
+#tabs .activetab > button {
+  margin-top: 0;
+}
+#tabs .tab > label {
+  border: none;
+}
+#tabs .activetab > label {
+  margin-top: 0;
+}
 /* Mini tabbed menu used in MCP
 ----------------------------------------*/
 #minitabs {
@@ -4217,6 +4280,20 @@ ul.cplist {
   margin-left: 2px;
 }
 #minitabs .tab > a:hover {
+  text-decoration: none;
+}
+#minitabs .tab > button {
+  border-radius: 5px 5px 0 0;
+  margin-left: 2px;
+}
+#minitabs .tab > label {
+  border-radius: 5px 5px 0 0;
+  margin-left: 2px;
+}
+#minitabs .tab > button:hover {
+  text-decoration: none;
+}
+#minitabs .tab > label:hover {
   text-decoration: none;
 }
 /* Responsive tabs
@@ -4376,6 +4453,14 @@ dd.pm_foe_colour {
   padding: 0 20px;
   display: inline-block;
   transition: background-color 0.15s ease;
+}
+.site-nav > ul > li > button {
+  padding: 14.5px 20px 14px 20px;
+  display: inline-block;
+  transition: background-color 0.15s ease;
+  background: none;
+  cursor: pointer;
+  outline: none;
 }
 .site-nav > ul > .font-icon > i,
 .site-nav > ul > .font-icon > a > i {
@@ -5397,7 +5482,16 @@ This file is generated by `grunt build`, do not edit it by hand.
 }
 
 .avatarImg {
-    width: 70px!important;
-    height: 70px!important;
-    border-radius: 50%!important;
-  }
+  width: 70px!important;
+  height: 70px!important;
+  border-radius: 50%!important;
+}
+
+button.button1 {
+  cursor: pointer;
+  outline: none;
+}
+.errorValue textarea,
+.errorValue input {
+  background-color: #e9c4c4!important
+}

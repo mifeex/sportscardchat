@@ -12,8 +12,12 @@
 .strong {
 	font-weight: bold;
 	text-decoration: underline;
+	outline: none;
+	margin: 0 3px 0 0!important;
 }
 
 .paginationSpan {
 	cursor: pointer;
+	outline: none;
+	margin: 0 3px 0 0!important;
 }

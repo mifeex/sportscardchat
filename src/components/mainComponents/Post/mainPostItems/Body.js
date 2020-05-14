@@ -21,7 +21,7 @@ const Body = (props) => {
             </li>
           </ul>
           <p className={s.author}><Link to="/date" >{date}</Link> </p>
-          <div className={s.content}>{text}</div>
+          <div className={s.content} style={{whiteSpace: "pre"}} dangerouslySetInnerHTML={{__html: text}}></div>
         </div>
       </div>
       </div>

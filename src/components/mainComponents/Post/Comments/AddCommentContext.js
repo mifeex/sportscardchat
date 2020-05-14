@@ -5,15 +5,12 @@ import {withAuthParams} from '../../../HOC/withAuthParams'
 import {compose} from 'redux'
 
 let addPost = () => ({type: 'ADD-COMMENT'});
-let changeArea = text => ({type: 'ADD-TEXT', text})
 
 const mapStateToProps = state => {
-	return {
-		comments: state.comments,
-	}
+	return {}
 }
 
 export default compose(
-		connect(mapStateToProps, {addPost, changeArea}),
+		connect(mapStateToProps, {addPost}),
 		withAuthParams,
 	)(AddComment)

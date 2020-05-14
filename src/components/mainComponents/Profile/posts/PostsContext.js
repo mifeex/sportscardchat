@@ -4,6 +4,7 @@ import Posts from './posts'
 import {params} from '../../../../api/getAPI';
 import {withRouter} from 'react-router-dom'
 import {getCategoryPost, getPage} from '../../../../redux/profile-reducer';
+import {compose} from 'redux'
 
 class PostsConnect extends React.Component{
 	constructor(props) {
@@ -49,8 +50,7 @@ const mapStateToProps = state => {
 	}
 }
 
-let withUrlDataComponent = withRouter(PostsConnect)
-
-const PostsContext = connect(mapStateToProps, {getCategoryPost, getPage})(withUrlDataComponent)
-
-export default PostsContext
+export default compose(
+		connect(mapStateToProps, {getCategoryPost, getPage}),
+		withRouter,
+	)(PostsConnect)

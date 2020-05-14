@@ -3,26 +3,12 @@ import {connect} from 'react-redux';
 import Sidebar from './SidebarComponents/Sidebar';
 import PopularPost from './SidebarComponents/PopularPost';
 import {Link} from 'react-router-dom';
-import {loginUser, userName, userPass, userStay, isAuth} from '../../../../../redux/user-reducer';
+import {loginUser} from '../../../../../redux/user-reducer';
 
 class SidebarContent extends React.Component {
 
-	constructor(props) {
-		super(props)
-	}
-
-	checkUser = () => {
-		
-		let data = {
-			name: this.props.user.email,
-			password: this.props.user.pass,
-		}
-
-		this.props.loginUser(data)
-	}
-
-	componentDidMount() {
-		this.props.isAuth()
+	checkUser = (data) => {
+		this.props.loginUser(data, 'check-user')
 	}
 
 	render() {
@@ -52,6 +38,6 @@ const mapStateToProps = state => {
 	}
 }
 
-const SidebarContext = connect(mapStateToProps, {userName, userPass, userStay, loginUser, isAuth})(SidebarContent)
+const SidebarContext = connect(mapStateToProps, {loginUser})(SidebarContent)
 
 export default SidebarContext

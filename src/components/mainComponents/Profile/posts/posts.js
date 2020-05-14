@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './posts.module.css';
-import Post from './post/post';
 import SidebarContext from './sidebar/SidebarContext';
 import {Link} from 'react-router-dom';
 import PostHeader from './Header/PostHeader'
+import PostBody from '../../../common/AllPost/PostBody'
 //умная компанента. Умеет отрисовывать посты. 
 
 const Posts = props => {
@@ -19,46 +19,11 @@ const Posts = props => {
               page={props.page}
               pageChange={props.pageChange}
           />
-          <div className="forabg">
-            <div className="inner">
-              <ul className="topiclist">
-                <li className="header">
-                  <dl className="icon">
-                    <dt>
-                      <div className="list-inner">
-                        <Link to="">{window.location.pathname}</Link>
-                      </div>
-                    </dt>
-                    <dd className="posts">Comments</dd>
-                    <dd className="lastpost">Last post</dd>
-                  </dl>
-                </li>
-              </ul>
-              <ul className="topiclist forums" style={{backgroundColor: '#FAFAFA'}}>
-                { 
-                  props.post.map(post => {
-                    return post.map(p => {
-                      return <Post tag={p.tag}
-                                  username={p.username}
-                                  count={p.commentCount}
-                                  postBody={p.post}
-                                  date={p.date}
-                                  key={p.id}
-                                  postId={p.id}
-                                  userId={p.userId}
-                                  type='post'
-                            />
-                    })
-                  }) 
-                }
-              </ul>
-           </div>
-          </div>
+          <PostBody elements={props.post} hasPost={false} />
         </div>
       </div>
     </div>
   )
 }
-
 
 export default Posts;

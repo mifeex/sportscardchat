@@ -1,0 +1,82 @@
+.login {
+	padding: 0 20px 20px 20px!important;
+}
+.center {
+	margin-left: 0%!important;
+}
+.centerPosition {
+	position: relative;
+	left: 30%
+}
+.centerPositionForCheckbox {
+	margin-left: 195px!important
+}
+.error {
+	position: relative;
+    left: 30%;
+    width: 600px!important;
+    margin: 0 0 10px 0!important;
+}
+.apiForm {
+	width: 40%!important;
+	float: right;
+	padding: 20px!important;
+	text-align: center;
+	border-left: 1px solid #000!important;
+	height: 206px!important;
+}
+.apiForm div {
+	margin: 10px 0;
+}
+.loginForm {
+	width: 60%!!important;
+}
+.headElem {
+	color: #000!important;
+}
+.discordButton {
+	background-color: #7289da!important;
+	-webkit-box-pack: center!important;
+	-ms-flex-pack: center!important;
+	justify-content: center!important;
+	-webkit-box-align: center!important;
+	-ms-flex-align: center!important;
+	align-items: center!important;
+	-webkit-box-sizing: border-box!important;
+	box-sizing: border-box!important;
+	border: none!important;
+	border-radius: 3px!important;
+	font-size: 18px!important;
+	font-weight: 500!important;
+	line-height: 16px!important;
+	padding: 2px 16px!important;
+	height: 38px!important;
+	min-width: 96px!important;
+	min-height: 38px!important;
+	cursor: pointer!important;
+	outline: none!important;
+}
+.discordButton a {
+	color: #fff!important;
+	width: 96px!important;
+	height: 38px!important;
+	margin: 10px!important;
+}
+.discordButton:hover {
+	background-color: #677bc4!important;
+}
+.youtubeButton {
+	background: none!important;
+	background-color: #c00!important;
+	padding: 10px 16px!important;
+	font-weight: 500!important;
+	font-size: 1.4rem!important;
+	letter-spacing: .007px!important;
+	margin: auto 4px!important;
+	border-radius: 2px!important;
+	text-transform: uppercase!important;
+	flex-direction: row;
+}
+.youtubeButton a {
+	color: #fff!important
+}

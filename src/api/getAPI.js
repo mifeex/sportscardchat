@@ -17,6 +17,13 @@ export const getAPI = {
 		})
 	},
 
+	postImage: (data, path) => {
+		return instance.post(path, data, {headers: {'content-Type': 'multipart/form-data'}})
+		.then(res => {
+			return res.data
+		})
+	},
+
 	getCategory: props => {
 		let {limit, page, path, extraPath} = props
 		path = 'category/';
@@ -35,6 +42,10 @@ export const getAPI = {
 	callMain: () => {
 		return hiddenAPI._getPage(``)
 	},
+
+	getQueriedParams: param => {
+		return hiddenAPI._getPage(param)
+	}
 }
 
 window.getAPI = getAPI
