@@ -2,8 +2,10 @@ const mysql = require('mysql2');
 
 const config = require('../connection');
 const pool = mysql.createPool(config);
+const fs = require('fs')
 
-let resultCode = 1
+let resultCode = 1;
+let filename = '';
 
 const getValue = (value = '', reqInDB = '', type) => {
 	return (req, res, next) => {
@@ -22,11 +24,25 @@ const getValue = (value = '', reqInDB = '', type) => {
 
 		switch(type) {
 			case 'category':
-				sqlQuery = `${reqInDB}'${data}'`;
-				secondQuery = `${value}'${data}' GROUP BY category, post LIMIT ${step}`;
+				sqlQuery = `${reqInDB} WHERE category='${data}'`;
+				secondQuery = `${value} WHERE category='${data}' GROUP BY category, post LIMIT ${step}`;
+				if (data === 'influencers') {
+					sqlQuery = `SELECT COUNT(*) as count FROM user WHERE influencer=1`;
+					secondQuery = `SELECT id, username, date FROM user WHERE influencer=1`
+				}
 				break;
 			case 'comment': 
 				secondQuery = `${value}'${data}'`;
+				sqlQuery = `${reqInDB}'${data}'`;
+				break;
+
+			case 'normal': 
+				sqlQuery = reqInDB;
+				secondQuery = value
+				break;
+
+			case 'user': 
+				secondQuery = `${value}'${data}' LIMIT 20`;
 				sqlQuery = `${reqInDB}'${data}'`;
 				break;
 
@@ -38,11 +54,12 @@ const getValue = (value = '', reqInDB = '', type) => {
 
 				else sqlQuery = `${reqInDB}'${data}' GROUP BY category, post LIMIT ${step}`;
 
-				secondQuery = `SELECT category, post_text as post, tag, p.date, username,
-						counts, u.id as userId, p.id FROM categories c 
+				secondQuery = `SELECT category, text as post, tag, p.date, username,
+						c.counts, u.id as userId, p.id FROM categories c
 						JOIN post p ON p.post_category=c.id
 						JOIN post_text pt ON p.post=pt.id
-						JOIN user u ON p.user_data=u.id WHERE tag LIKE '%${req.query.q}%' AND category='${data}' ${isEmpty ? `LIMIT ${step}` : ''}`;			
+						JOIN user u ON p.user_data=u.id WHERE tag LIKE '%${req.query.q}%'
+						AND category='${data}' ${isEmpty ? `LIMIT ${step}` : ''}`;
 				break;
 
 			default:
@@ -65,7 +82,7 @@ const getValue = (value = '', reqInDB = '', type) => {
 					else {totalCount = results}
 
 					connection.query(secondQuery,
-					(error, result) => {
+					(error, result, rows, fields) => {
 						if (error) {
 							return connection.rollback(() => {
 								res.json('error')

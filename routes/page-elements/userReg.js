@@ -52,8 +52,8 @@ router.post('/register-user', (req, res, next) => {
 				}
 
 				else {
-					pool.query(`INSERT INTO user(username, password, date, posts, influencer, email) 
-								VALUES ('${username}', '${hash}', '${date.toDateString()}', 0, 0, '${email}')`, 
+					pool.query(`INSERT INTO user(username, password, date, posts, influencer, email, hasImage) 
+								VALUES ('${username}', '${hash}', '${date.toDateString()}', 0, 0, '${email}', 0)`, 
 					(err, result2) =>{
 						if (err) {
 							resultCode = 1;

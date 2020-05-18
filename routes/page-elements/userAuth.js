@@ -116,8 +116,6 @@ router.get('/login', async (req, res, next) => {
 
 		let user = await client.getUser(req.session.key)
 
-		console.log(user)
-
 		req.session.email = user.username; //we use separate "username" and "id". This values give us Discord API
 		req.session.userId = user.discriminator
 
@@ -125,12 +123,10 @@ router.get('/login', async (req, res, next) => {
 
 		req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 90;
 
-		// user.username.toLowerCase()
-
 		pool.query(`SELECT * FROM user WHERE id=${user.discriminator}`, (err, result) => { //checking is user in the system
 			if (result === undefined || result.length < 1) {
-				pool.query(`INSERT INTO user(id, username, date, posts, influencer) 
-							VALUES (${user.discriminator}, '${user.username}', '${date.toDateString()}', 0, 0)`,
+				pool.query(`INSERT INTO user(id, username, date, posts, influencer, image, hasImage) 
+							VALUES (${user.discriminator}, '${user.username}', '${date.toDateString()}', 0, 0, ${user.avatarUrl()}, 1)`,
 				(err, result2) =>{
 					res.json({
 						resultCode,

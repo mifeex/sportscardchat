@@ -2,11 +2,11 @@ const express = require('express');
 const router = express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const gcsSharp = require('multer-sharp');
 
 const mysql = require('mysql');
 
 const config = require('../connection');
-// const pool = mysql.createPool(config);
 
 const date = new Date();
 
@@ -17,16 +17,12 @@ let postTextId = 0;
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		if(req.body.tag !== undefined) {
-			fileName = `${req.body.tag}_${date.toDateString()}.jpg`;
-			// console.log(fileName)
-		}
 		cb(null, './images/');
 	},
 	filename: (req, file, cb) => {
 		let addedpic = file.fieldname;
-		cb(null, addedpic)	
-	}
+		cb(null, `${addedpic}_${req.params.data}.jpg`)
+	},
 })
 
 class Database {
@@ -62,7 +58,7 @@ const upload = multer({ storage, dest: './images/' })
 
 router.use(bodyParser.json());
 
-router.post('/new-post', upload.any('addedpic'), (req, res, next) => {
+router.post('/new-post/:data', upload.any('addedpic'), (req, res, next) => {
 	const data = req.body
 
 	let postText = null;
@@ -96,8 +92,9 @@ router.post('/new-post', upload.any('addedpic'), (req, res, next) => {
 			if (results !== undefined) { // if post body was added success insert data into post row
 				postTextId = results.insertId;
 			}
-			return DB.query(`INSERT INTO post(post_category, commentCount, tag, user_data, date, post) 
-					VALUES (${postCategory.substring(0, 1)}, 0, "${tag}", ${req.session.userId}, "${date.toDateString()}", ${postTextId})`)
+			return DB.query(`INSERT INTO post(post_category, counts, tag, user_data, date, post, hasImage) 
+					VALUES (${postCategory.substring(0, 1)}, 0, "${tag}", ${req.session.userId}, "${date.toDateString()}", ${postTextId},
+					${req.files === undefined ? 0 : 1})`)
 		})
 		.then(results => {
 			postTextId = results.insertId
@@ -107,7 +104,7 @@ router.post('/new-post', upload.any('addedpic'), (req, res, next) => {
 		.then(results => {
 			postTextId
 			console.log(`${postTextId} - therd promise`)
-			return DB.query(`UPDATE categories SET last_posts=${postTextId}, postCount=postCount + 1 WHERE id=${postCategory.substring(0, 1)}`)
+			return DB.query(`UPDATE categories SET last_posts=${postTextId}, counts=counts + 1 WHERE id=${postCategory.substring(0, 1)}`)
 		})
 		.then(results => {
 			console.log(`Everything working here: 92 string`)
