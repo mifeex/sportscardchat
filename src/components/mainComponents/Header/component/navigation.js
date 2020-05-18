@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import {required} from '../../../../utils/validation/validation'
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Redirect} from 'react-router-dom';
 
 const SearchForm = props => {
 	return (
@@ -12,7 +13,7 @@ const SearchForm = props => {
 			<fieldset>
 				<Field validate={[required]}
 						component="input"
-						name="searc"
+						name="search"
 						type="search"
 						placeholder="Search"
 				/>
@@ -29,8 +30,7 @@ const HeaderSearchForm = reduxForm({form: 'search'})(SearchForm)
 const Navigation = props => {
 
 	const setValue = e => {
-		console.log(e)
-		props.getQueriedParams(e)
+		props.Search(e)
 	}
 
 	return (

@@ -23,7 +23,23 @@ class SidebarContent extends React.Component {
 					</h4> 
 				</div>
 				: <Sidebar {... this.props} checkUser={this.checkUser}/>}
-				<PopularPost />
+				<div className="side-block">
+					<h4 className="side-block-head">Popular posts</h4>
+						<div className="side-block-body" id="sidebar-recent-posts">
+							{
+								this.props.popularPost.map(cat => {
+									return <PopularPost
+										post={cat.post}
+										username={cat.username}
+										tag={cat.tag}
+										userId={cat.userId}
+										postId={cat.id}
+										key={cat.id}
+									/>
+								}) 
+							}
+					</div>
+				</div>
 			</div>
 		)
 	}
@@ -35,6 +51,7 @@ const mapStateToProps = state => {
 		user: state.userdata.userEnteredData,
 		authUser: state.userdata.userAuthData,
 		isAuthUser: state.userdata.isAuth,
+		popularPost: state.posts.popularPost,
 	}
 }
 

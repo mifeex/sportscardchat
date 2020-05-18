@@ -1,39 +1,53 @@
 import React from 'react';
 import s from './comments.module.css';
-import { Field, reduxForm } from 'redux-form';
-import {required, maxLengthCreator} from '../../../../utils/validation/validation';
-import {Textarea} from '../../../common/FormControls/FormControls';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import AddValueBlock from '../../../common/AllPost/addValueBlock';
+import {connect} from 'react-redux';
+import openSocket from 'socket.io-client'
 // тупая компонента.
 
-const maxLength = maxLengthCreator(800)
+const socket = openSocket('http://localhost:8000/')
 
-const commentForm = props => {
+let CommentForm = props => {
 	return (
 		<form onSubmit={props.handleSubmit}>
-			<Field validate={[required, maxLength]}
-					name="addComment"
-					component={Textarea}
-					className={`${s.newCommentBox} inputbox`}
-					id='message-box'
-					placeholder={'New comment'}
-			/>
-			<button className="button1">Add Comment</button>
+			<fieldset className="fields1">
+				<AddValueBlock {...props} />
+				<button className="button1">Add Comment</button>
+			</fieldset>
 		</form>
 	)
-}
+}///
 
-const NewComment = reduxForm({
-  form: 'newComment' // a unique identifier for this form
-})(commentForm)
+CommentForm = reduxForm({
+  form: 'NewComment'
+})(CommentForm)
 
-const AddComment = (props) => {
-	let addPost = (e) => {
-		props.addPost(e);
+const selector = formValueSelector('NewComment')
+
+CommentForm = connect(state => {
+	let message = selector(state, 'message')
+	return {
+		message,
+	}
+})(CommentForm)
+
+class AddComment extends React.Component {
+	addPost = (e) => {
+		socket.emit('comment', {message: e.message, userId: this.props.userId, postId: this.props.postId[0][0].postId})
 	}
 
-	return (
-		<NewComment onSubmit={addPost}/>
-	)
+	componentDidMount() {
+		socket.on('user-commented', data => {
+			this.props.addPost(data[0]);
+		})
+	}
+
+	render() {
+		return (
+			<CommentForm onSubmit={this.addPost}/>
+		)
+	}
 }
 
 export default AddComment;

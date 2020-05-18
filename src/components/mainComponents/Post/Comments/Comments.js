@@ -4,6 +4,7 @@ import UserStats from '../mainPostItems/UserStats';
 import Body from '../mainPostItems/Body';
 //тупая компонента.
 const Comments = (props) => {
+
 	return (
 		<div className='item'>
 			<div>
@@ -19,6 +20,8 @@ const Comments = (props) => {
 											name={ad.username}
 											key={ad.userId}
 											userId={ad.userId}
+											hasImage={ad.userImage}
+											image={ad.image}
 									/>
 								}</div>
 
@@ -31,6 +34,8 @@ const Comments = (props) => {
 											inReply={props.inReply}
 											key={ad.postId}
 											postId={ad.postId}
+											hasImage={ad.postImage}
+											imageInPostId={props.imageInPostId}
 										/>
 									}
 								</div>

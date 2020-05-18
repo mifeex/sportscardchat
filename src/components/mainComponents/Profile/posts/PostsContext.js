@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import Posts from './posts'
 import {params} from '../../../../api/getAPI';
 import {withRouter} from 'react-router-dom'
-import {getCategoryPost, getPage} from '../../../../redux/profile-reducer';
-import {compose} from 'redux'
+import {getCategoryPost, getPage, setPopularPost} from '../../../../redux/profile-reducer';
+import {compose} from 'redux';
+import {withSuccessSearching} from '../../../HOC/withSuccessSearching'
 
 class PostsConnect extends React.Component{
 	constructor(props) {
@@ -23,9 +24,10 @@ class PostsConnect extends React.Component{
 	}
 
 	componentDidMount() {
-		params.page = this.props.page
+		params.page = this.props.page;
 
-		this.props.getCategoryPost(params)
+		this.props.setPopularPost();
+		this.props.getCategoryPost(params);
 	}
 
 	render() {
@@ -36,6 +38,7 @@ class PostsConnect extends React.Component{
 				page={this.props.page}
 				post={this.props.post}
 				pageChange={this.pageChange}
+				file={this.props.file}
 			/>
 		)
 	}
@@ -46,11 +49,13 @@ const mapStateToProps = state => {
 		post: state.posts.post,
 		page: state.posts.page,
 		limit: state.posts.limit,
-		totalPostCount: state.posts.totalPostCount
+		totalPostCount: state.posts.totalPostCount,
+		file: state.posts.file,
 	}
 }
 
 export default compose(
-		connect(mapStateToProps, {getCategoryPost, getPage}),
+		connect(mapStateToProps, {getCategoryPost, getPage, setPopularPost}),
 		withRouter,
+		withSuccessSearching,
 	)(PostsConnect)

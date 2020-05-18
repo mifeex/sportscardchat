@@ -12,7 +12,12 @@ const UserStats = (props) => {
       <div className='postprofile' id="profile2">
         <dt className='noProfileRank noAvatar'>
           <div className='avatarСontainer'>
-            <img className='avatarImg' src={avatar} />
+            <img className='avatarImg' 
+              src={
+                  !!props.hasImage ? 
+                    `${props.image}`
+                  : `http://localhost:4000/userPhoto/addedpic_default.jpg`
+                }/>
           </div>
           <Link to={`/user/${userId}`} className="username-coloured" style={{color: '#00AA00'}}>{user}</Link>
         </dt>

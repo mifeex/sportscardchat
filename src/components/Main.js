@@ -2,6 +2,7 @@ import React from 'react';
 import '../style/style.css';
 import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {compose} from 'redux'
 
 import {HeaderContext} from './mainComponents/Header/HeaderContext';
 import CategoryContext from './mainComponents/Categories/CategoryContext';
@@ -13,6 +14,8 @@ import LogPageContext from './mainComponents/LogPages/LogPageContext'
 import RegPageContext from './mainComponents/LogPages/RegPageContext'
 import LoginWithDiscord from './mainComponents/LogPages/withAPI/LoginWithDiscord'
 import UserContext from './mainComponents/Users/UserContext'
+import GetInfuencer from './mainComponents/Categories/SeparateCategory/GetInfuencerContext'
+import SearchContext from './mainComponents/Search/SearchContext'
 
 import {isAuth} from '../redux/user-reducer';
 
@@ -43,18 +46,20 @@ class MainAppComponent extends React.Component {
 					<Route exact path='/' render={() => <CategoryContext />} />
 					<Route path='/post/:postId' render={() => <CommentsContext />} />
 					<Route path='/category/:categoryId' render={() => <Profile />} />
+					<Route path='/Influencers' render={() => <GetInfuencer />} />
 					<Route path='/post/discussion' render={() => <AddCommentContext />} />
 					<Route path='/post/new' render={() => <NewPostContext />} />
 					<Route path='/login' render={() => <LogPageContext />} />
 					<Route path='/register' render={() => <RegPageContext />} />
 					<Route path='/use/discord' render={() => <LoginWithDiscord />} />
 					<Route path="/user/:userId" render={() => <UserContext />} />
+					<Route path='/search' render={() => <SearchContext />} />
 				</div>
 			</div>
 		);
 	}
 }
 
-const Main = connect(mapStateToProps, {isAuth})(MainAppComponent)
-
-export default Main
+export default compose(
+		connect(mapStateToProps, {isAuth}),
+	)(MainAppComponent)

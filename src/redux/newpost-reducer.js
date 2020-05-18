@@ -18,13 +18,9 @@ const newPostReducer = (state = initialState, action) => {
 		return newState.previewText = text
 	}
 
-	const _addBeautify = element => {
-		newState.previewText += `${element}`
-		return newState.previewText
-	}
-
 	const _saveError = error => {
 		if (error !== undefined && error !== '' && error !== null) {
+			newState.previewText = ""
 			newState.error = error
 		}
 		
@@ -34,6 +30,7 @@ const newPostReducer = (state = initialState, action) => {
 	}
 
 	const _addSuccess = success => {
+		newState.previewText = ""
 		return newState.isAddedSuccess = success;
 	}
 
@@ -45,10 +42,6 @@ const newPostReducer = (state = initialState, action) => {
 			
 		case 'SHOW-PREVIEW':
 			_showPreview(action.text)
-			return newState
-
-		case 'ADD-BEAUTIFY':
-			_addBeautify(action.element)
 			return newState
 
 		case 'SUCCESS':
@@ -66,27 +59,21 @@ const newPostReducer = (state = initialState, action) => {
 
 export const showPreviewStatus = bool  => ({type: 'CHANGE-PREVIEW-STATUS', bool})
 export const showPreview = text  => ({type: 'SHOW-PREVIEW', text})
-export const useAddPostBeautify = element => ({type: 'ADD-BEAUTIFY', element})
+export let successPosting = success => ({type: 'SUCCESS', success});
 let saveError = error => ({type: 'ERROR', error});
-export let successPosting = success => ({type: 'SUCCESS', success})
 
-export const addNewPost = (data, way) => dispatch => {
+export const addNewPost = (data) => dispatch => {
 
 	const {category, message, tag} = data.e
 
-	// await 
-	// getAPI.postImage(data.form, way)
-	// .then(data => {
-	// 	if (data.resultCode === 0) {
+	getAPI.postImage(data.form, `new-post/${tag}`)
+	.then(data => {
+		if (data.resultCode === 1) {
+			dispatch(saveError(data.error))
+		}
+	})
 
-	// 	}
-	// 	else {
-	// 		dispatch(saveError(data.error))
-	// 	}
-	// })
-
-	// await 
-	getAPI.postValue({category, message, tag}, way)
+	getAPI.postValue({category, message, tag}, `new-post/${tag}`)
 	.then(data => {
 		if (data.resultCode === 0) {
 			dispatch(successPosting(data.isAddedSuccess))

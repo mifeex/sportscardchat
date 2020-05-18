@@ -29,7 +29,7 @@ const PostBody = props => {
           {
             props.elements.map(cat => {
               return <Post
-                        postBody=''
+                        postBody={cat.post}
                         type={type}
                         username={cat.username}
                         tag={cat.tag}
@@ -39,6 +39,8 @@ const PostBody = props => {
                         category={cat.category}
                         key={cat.id}
                         count={cat.counts}
+                        file={props.file}
+                        hasImage={cat.hasImage}
               />
             }) 
           }

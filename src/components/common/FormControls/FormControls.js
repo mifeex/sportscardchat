@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Textarea = ({input, meta, ...props}) => {	
 	return (
-		<div className={meta.error && (!meta.pristine || meta.touched) && "errorValue"}>
+		<div className={meta.error && (!meta.pristine || meta.touched) ? "errorValue" : ""}>
 			<textarea {...input} {...props} />
 		</div>
 	)
@@ -16,7 +16,7 @@ export const Input = ({input, meta, ...props}) => {
 	}
 	
 	return (
-		<div className={meta.error && (!meta.pristine || meta.touched) && "errorValue"}>
+		<div className={meta.error && (!meta.pristine || meta.touched) ? "errorValue" : ""}>
 			<input onKeyPress={show} {...input} {...props} />
 		</div>
 	)

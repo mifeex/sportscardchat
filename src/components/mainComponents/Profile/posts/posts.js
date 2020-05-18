@@ -7,6 +7,7 @@ import PostBody from '../../../common/AllPost/PostBody'
 //умная компанента. Умеет отрисовывать посты. 
 
 const Posts = props => {
+
   return (
     <div>
       <SidebarContext />
@@ -19,7 +20,7 @@ const Posts = props => {
               page={props.page}
               pageChange={props.pageChange}
           />
-          <PostBody elements={props.post} hasPost={false} />
+          <PostBody file={props.file} elements={props.post} hasPost={false} />
         </div>
       </div>
     </div>

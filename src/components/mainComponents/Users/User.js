@@ -8,34 +8,33 @@ import YouTube from 'react-youtube';
 // тупая компонента.
 
 const maxLength = maxLengthCreator(800)
-
-// const NewComment = reduxForm({
-//   form: 'newComment' // a unique identifier for this form
-// })(commentForm)
-
  
 class Example extends React.Component {
 	render() {
 		const opts = {
-			height: '390',
-			width: '640',
+			height: '290',
+			width: '440',
 			playerVars: {
-	        // https://developers.google.com/youtube/player_parameters
 				autoplay: 1,
 			},
 		};
 	 
-		return <YouTube videoId="wcwG-pofoZk" opts={opts} onReady={this._onReady} />;
+		return <YouTube videoId={this.props.videoId} opts={opts} onReady={this._onReady} />;
 		}
  
 		_onReady(event) {
-    // access to player in all event handlers via event.target
-		event.target.pauseVideo();
-	}
+			event.target.pauseVideo();
+		}
 }
 
-
 const User = (props) => {
+
+	const onChangePostImage = e => {
+		if (e.target.files.length) {
+			props.onChangeImage(e.target.files[0])
+		}
+	}
+
 	return (
 		<>
 			<h2>User Profile</h2>
@@ -46,9 +45,18 @@ const User = (props) => {
 						<div className="column1">
 							<div>
 								<label style={{cursor: "pointer"}} htmlFor="avatar">
-									<img style={{width: "200px", height: "200px"}} src="https://sun9-3.userapi.com/c543105/v543105546/723da/BKmkn5Gar_g.jpg"/>
+									<img style={{width: "200px", height: "200px"}} 
+										src={
+											!!props.userData.hasImage ? 
+												props.isSuccess ? 
+													`${props.newImage}` : 
+													`${props.userData.image}`
+											: `http://localhost:4000/userPhoto/addedpic_default.jpg`
+										}/>
 								</label>
-								<input style={{display: 'none'}} type="file" id="avatar" />
+								{props.isAuth && props.userData.id === props.userAuthId ? 
+									<input onChange={onChangePostImage} style={{display: 'none'}} type="file" id="avatar" name={"userPhoto"}/> 
+									: <></>}
 							</div>
 						</div>
 
@@ -68,7 +76,7 @@ const User = (props) => {
 			</div>
 			<div id="forumlist">
 				<div id="forumlist-inner">
-					<PostBody elements={props.userPost} hasPost={false} /> : <></>
+					<PostBody file={props.file} elements={props.userPost} hasPost={false} /> : <></>
 				</div>
 			</div>
 			{props.userData.influencer && 
@@ -78,8 +86,7 @@ const User = (props) => {
 					</div>
 					<div id="forumlist">
 						<div id="forumlist-inner">
-							<Example/>
-							<Example/>
+							<Example videoId={"wcwG-pofoZk"} />
 						</div>
 					</div>
 				</>

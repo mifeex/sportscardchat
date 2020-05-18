@@ -21,3 +21,10 @@
 	outline: none;
 	margin: 0 3px 0 0!important;
 }
+
+.attach {
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline!important;
+	color: #5d6c80!important;
+}

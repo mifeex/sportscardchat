@@ -5,8 +5,9 @@ const initialState = {
 	userData: [],
 	userPost: [],
 	isAuth: false,
-	useLink: '',
-	error: '' 
+	error: '',
+	successUpdate: false,
+	image: '',
 }
 
 const userReducer = (state = initialState, action) => {
@@ -17,7 +18,6 @@ const userReducer = (state = initialState, action) => {
 
 	newState.userAuthData = {...state.userAuthData}
 	newState.userData = {...state.userData}
-	// newState.userPost = {...state.userPost}
 
 	const _checkUserAuth = data => {
 		if (data.resultCode === 0) {
@@ -60,6 +60,11 @@ const userReducer = (state = initialState, action) => {
 		newState.userPost = posts
 	}
 
+	const _saveNewImage = values => {
+		newState.successUpdate = !newState.successUpdate
+		newState.image = values.image
+	}
+
     switch (action.type) {
 		case 'LOGIN-USERS':
 			_checkUserAuth(action.data);
@@ -81,6 +86,10 @@ const userReducer = (state = initialState, action) => {
 			_setUserPosts(action.posts)
 			return newState
 
+		case 'NEW-IMAGE':
+			_saveNewImage(action.values)
+			return newState
+
 		case 'ERROR':
 			_saveError(action.error)
 			return newState
@@ -94,7 +103,8 @@ let checkUserAuth = (resultCode, userId, email) => ({type: 'LOGIN-USERS', data: 
 let getUser = data => ({type: 'GET-USER-DATA', data})
 let loggedUserOut = resultCode => ({type: 'LOGGED-OUT', resultCode})
 let getUserPosts = posts => ({type: 'GET-USER-POSTS', posts})
-let loginWithAPI = link => ({type: 'USING-API', link})
+let loginWithAPI = link => ({type: 'USING-API', link});
+const saveImage = (image, successUpdate) => ({type: 'NEW-IMAGE', values: {image, successUpdate}})
 
 let saveError = error => ({type: 'ERROR', error});
 export const loginUser = (data, way) => dispatch => {
@@ -153,24 +163,24 @@ export const redirectWithDiscord = url => dispatch => {
 export const getAll = userId => dispatch => {
 	getAPI.getQueriedParams(`get-user/${userId}`)
 	.then(data => {
-		dispatch(getUserPosts(data.result))
-		// if (data.resultCode === 0) {
+			dispatch(getUserPosts(data.result))
 			dispatch(getUser(data.totalCount[0]))
-		// }
-		// else {
-		// 	dispatch(saveError(data.error))
-		// }
 	})
 }
 
-// export const getPost = userId => dispatch => {
-// 	getAPI.getQueriedParams(`get-user/posts/${userId}`)
-// 	.then(data => {
+export const updateProfileImage = (userId, image) => dispatch => {
+	const form = new FormData();
+	form.append("addedpic", image, image.name)
 
-// 		else {
-// 			dispatch(saveError(data.error))
-// 		}
-// 	})
-// }
+	getAPI.postImage(form, `update-photo/${userId}`)
+	.then(data => {
+		if (data.resultCode === 0) {
+			dispatch(saveImage(data.newImage, data.isSuccess))
+		}
+		else {
+			dispatch(saveError(data.error))
+		}
+	})
+}
 
 export default userReducer;

@@ -5,6 +5,7 @@ import {compose} from 'redux'
 import {getComments} from '../../../../redux/comment-reducer';
 import {withRouter} from 'react-router-dom'
 import {Link} from 'react-router-dom';
+import {withSuccessSearching} from '../../../HOC/withSuccessSearching'
 
 const mapStateToProps = state => {
 	return {
@@ -23,8 +24,13 @@ class CommentsContent extends React.Component{
 		return (
 			<div>
 				<Link to="/">&#8592; back to main page</Link>
-				<div>{this.props.post.map((e, key) => <Comments element={e} key={key} />)}</div>
-				<div>{this.props.comments.map((e, key) => <Comments element={e} inReply={true} key={key} />)}</div>
+				<div>{this.props.post.map((e, key) => <Comments element={e} key={key}/>)}</div>
+				<div>{this.props.comments.map((e, key) => <Comments element={e}
+						inReply={true}
+				 		key={key}
+				 		imageInPostId={this.props.match.params.postId} 
+				 		/>
+				 	)}</div>
 			</div>
 		)
 	}///
@@ -33,4 +39,5 @@ class CommentsContent extends React.Component{
 export default compose(
 		connect(mapStateToProps, {getComments}),
 		withRouter,
+		withSuccessSearching,
 	)(CommentsContent)

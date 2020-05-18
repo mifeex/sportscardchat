@@ -3,14 +3,13 @@ import {loggedOut} from '../../../redux/user-reducer';
 import {connect} from 'react-redux';
 import Navigation from './component/navigation'
 import MainHeader from './component/MainHeader'
-import {getQueriedParams} from '../../../redux/search-reducer'
+import {Search} from '../../../redux/search-reducer';
 
 const mapStateToProps = state => {
 	return {
 		isAuthUser: state.userdata.isAuth,
 		userName: state.userdata.userAuthData.email,
 		userId: state.userdata.userAuthData.userId,
-		search: state.search.value,
 	}
 }
 
@@ -26,5 +25,4 @@ class Header extends React.Component {
 	}
 }
 
-export const HeaderContext = connect(mapStateToProps, {getQueriedParams, loggedOut})(Header)
-
+export const HeaderContext = connect(mapStateToProps, {Search, loggedOut})(Header)

@@ -2,8 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux'
 import {withAuthParams} from '../../HOC/withAuthParams';
+import {withSuccessSearching} from '../../HOC/withSuccessSearching'
 import NewPost from './newPost'
-import {showPreview, showPreviewStatus, useAddPostBeautify, addNewPost, successPosting} from '../../../redux/newpost-reducer';
+import {showPreview, showPreviewStatus, addNewPost, successPosting} from '../../../redux/newpost-reducer';
 import {getCategories} from '../../../redux/categories-reducer';
 import {Redirect} from 'react-router-dom';
 
@@ -23,7 +24,7 @@ class NewPostContext extends React.Component {
 	}
 
 	addNewUserPost = data => {
-		this.props.addNewPost(data, 'new-post')
+		this.props.addNewPost(data)
 	}
 
 	render() {
@@ -40,6 +41,7 @@ class NewPostContext extends React.Component {
 }///
 
 export default compose(
-		connect(mapStateToProps, {showPreview, showPreviewStatus, getCategories, useAddPostBeautify, addNewPost, successPosting}),
+		connect(mapStateToProps, {showPreview, showPreviewStatus, getCategories, addNewPost, successPosting}),
 		withAuthParams,
+		withSuccessSearching,
 	)(NewPostContext)

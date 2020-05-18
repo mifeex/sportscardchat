@@ -5,6 +5,7 @@ import LogPage from './LogPage'
 import {loginUser, useDiscord} from '../../../redux/user-reducer';
 import {Redirect} from 'react-router-dom';
 import {withLoggedParams} from '../../HOC/withLoggedParams'
+import {withSuccessSearching} from '../../HOC/withSuccessSearching'
 
 const mapStateToProps = state => {
 	return {
@@ -39,4 +40,5 @@ class RegPageContext extends React.Component {
 export default compose(
 		connect(mapStateToProps, {loginUser, useDiscord}),
 		withLoggedParams,
+		withSuccessSearching,
 	)(RegPageContext)
