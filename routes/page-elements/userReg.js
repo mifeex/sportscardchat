@@ -76,6 +76,7 @@ router.post('/register-user', (req, res, next) => {
 						}
 
 					})
+					pool.end()
 				}
 			});
 		}
@@ -85,6 +86,7 @@ router.post('/register-user', (req, res, next) => {
 			return res.json({resultCode, error: `This username or email already !exists!`})
 		}
 	})
+	pool.end()
 })
 
 module.exports = router

@@ -17,6 +17,8 @@ const registration = require('./page-elements/userReg');
 const newPost = require('./page-elements/newPost');
 const userPhoto = require('./page-elements/userPhoto')
 const search = require('./page-elements/search')
+const addYoutubeVideo = require('./page-elements/addYoutubeVideo')
+const reset = require('./page-elements/reset')
 
 const corsOptions = {
 	origin: true,
@@ -49,14 +51,17 @@ app.use('/images', express.static(path.join(__dirname + '/images')))
 app.use('/userPhoto', express.static(path.join(__dirname + '/images/userPhoto')))
 
 app.get('/auth/me', userAuth);
-app.post('/check-user', userAuth);
 app.get('/logout', userAuth);
 app.get('/login', userAuth);
 
+app.post('/password/reset', reset);
+app.post('/password/code/check', reset);
+app.post('/new/video', addYoutubeVideo)
 app.post('/register-user', registration);
 app.post('/new-post/:data', newPost);
 app.post('/update-photo/:userId', userPhoto);
 app.post('/search', search);
+app.post('/check-user', userAuth);
 
 app.get('/', main);
 
@@ -102,6 +107,10 @@ app.get('/search-in-posts/category/:data', middleware.getQueryValue(``,
 	WHERE category=`, 'find'))
 
 app.get('/get/category', second_middleware.getSimpleValue(`SELECT category, id FROM categories`, 'getValue'))
+
+app.get('/videoPath/:data', second_middleware.getSimpleValue(`SELECT path, id FROM youtube WHERE userId=`, 'getUser'))
+
+app.get('/set/influencer/:data', second_middleware.getSimpleValue(`UPDATE user SET influencer = 1 WHERE id=`, 'getUser'))
 
 app.get('/get/popular-post', second_middleware.getSimpleValue(`SELECT text as post, tag, username, u.id as userId, p.id 
 	FROM categories c 

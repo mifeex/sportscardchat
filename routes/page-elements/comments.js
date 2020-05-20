@@ -1,6 +1,7 @@
 const app = require('express')()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
+const multer = require('multer');
 
 const port = 8000
 
@@ -13,7 +14,19 @@ const users = {};
 
 let commentIndexId = 0
 
-app.post('/comments', (req, res, next) => {
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, './images/');
+	},
+	filename: (req, file, cb) => {
+		let addedpic = file.fieldname;
+		cb(null, `${addedpic}_${req.params.data}.jpg`)
+	},
+})
+
+const upload = multer({ storage, dest: './images/' })
+
+app.post('/', upload.any('addedpic'), (req, res, next) => {
 	res.sendFile('../../public/index.html')
 })
 
@@ -44,11 +57,12 @@ class Database {
 	}
 }
 
-const DB = new Database(config)
+
 
 io.on('connection', (socket) => {
 	socket.on('comment', (value) => {
-		console.log(value.userId)
+		const DB = new Database(config)
+
 		DB.query(`INSERT INTO comment_text(comment_text) VALUES('${value.message}')`)
 		.then(results => {
 			commentIndexId = results.insertId;
@@ -68,7 +82,8 @@ io.on('connection', (socket) => {
 							JOIN comment_text ct ON c.comment_text=ct.id WHERE c.comment_text = ${commentIndexId}`)
 		})
 		.then(results => {
-			socket.emit('user-commented', results)
+			socket.emit('user-commented', results);
+			return DB.close();
 		})
 	})
 })

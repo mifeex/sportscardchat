@@ -134,6 +134,7 @@ router.get('/login', async (req, res, next) => {
 						email: req.session.email
 					})
 				})
+				pool.end()
 			}
 			else {
 				res.json({
@@ -143,6 +144,7 @@ router.get('/login', async (req, res, next) => {
 				})
 			}
 		})
+		pool.end()
 	}
 })
 

@@ -39,6 +39,7 @@ router.post('/update-photo/:userId', upload.any('userPhoto'), (req, res, next) =
 				return res.json({resultCode: 0, isSuccess: true, newImage: `http://localhost:4000/userPhoto/addedpic_${req.params.userId}_1.jpg`})
 			}
 	})
+	pool.end()
 })
 
 module.exports = router

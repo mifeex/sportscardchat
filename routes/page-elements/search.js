@@ -26,6 +26,7 @@ router.post('/search', (req, res, next) => {
 				return res.json({resultCode: 0, result2})
 			}
 	})
+	pool.end()
 })
 
 module.exports = router

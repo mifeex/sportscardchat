@@ -52,13 +52,14 @@ class Database {
 	}
 }
 
-const DB = new Database(config)
+
 
 const upload = multer({ storage, dest: './images/' })
 
 router.use(bodyParser.json());
 
 router.post('/new-post/:data', upload.any('addedpic'), (req, res, next) => {
+	const DB = new Database(config)
 	const data = req.body
 
 	let postText = null;
