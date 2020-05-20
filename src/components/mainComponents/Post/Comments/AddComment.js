@@ -12,7 +12,7 @@ let CommentForm = props => {
 	return (
 		<form onSubmit={props.handleSubmit}>
 			<fieldset className="fields1">
-				<AddValueBlock {...props} />
+				<AddValueBlock {...props} comment={true} />
 				<button className="button1">Add Comment</button>
 			</fieldset>
 		</form>
@@ -20,7 +20,7 @@ let CommentForm = props => {
 }///
 
 CommentForm = reduxForm({
-  form: 'NewComment'
+	form: 'NewComment'
 })(CommentForm)
 
 const selector = formValueSelector('NewComment')

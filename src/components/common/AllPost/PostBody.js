@@ -17,7 +17,7 @@ const PostBody = props => {
             <dl className="icon">
               <dt>
                 <div className="list-inner">
-                  <Link to="/">All categories</Link>
+                  <Link to="/">{props.hasPost ? 'All categories' : props.category}</Link>
                 </div>
               </dt>
               <dd className="posts">{props.hasPost ? 'Posts' : 'Comments'}</dd>

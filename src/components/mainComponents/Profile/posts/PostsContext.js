@@ -39,6 +39,7 @@ class PostsConnect extends React.Component{
 				post={this.props.post}
 				pageChange={this.pageChange}
 				file={this.props.file}
+				category={this.props.match.params.categoryId}
 			/>
 		)
 	}

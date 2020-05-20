@@ -4502,15 +4502,12 @@ dd.pm_foe_colour {
 }
 #site-header,
 #site-logo {
-  min-height: 100px;
 }
 #site-header {
   font-size: 1.3em;
-  line-height: 100px;
 }
 #site-logo {
   float: left;
-  line-height: 96px;
   margin: 0 30px 0 0;
 }
 .site-logo {

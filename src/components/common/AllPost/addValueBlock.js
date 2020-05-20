@@ -81,7 +81,7 @@ const AddValueBlock = props => {
 							<FontAwesomeIcon icon={faLink} />
 						</button>
 					</li>
-					<li style={{height: "33px"}} id="options-panel-tab" className={`tab ${s.tab} ${s.addPostHeader}`}>
+					{!props.comment ? <li style={{height: "33px"}} id="options-panel-tab" className={`tab ${s.tab} ${s.addPostHeader}`}>
 						<Field
 							name="addedpic"
 							component={FieldFileInput}
@@ -89,7 +89,7 @@ const AddValueBlock = props => {
 							id="addFile"
 							className={s.addPostHeader}
 						/>
-					</li>
+					</li> : <></>}
 				</ul>
 			</div>
 

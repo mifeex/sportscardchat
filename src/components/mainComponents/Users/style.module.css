@@ -1,0 +1,15 @@
+.videoInner div {
+	width: 50%!important;
+	float: left!important;
+}
+
+.error {
+	position: relative;
+	left: 30%;
+	width: 600px!important;
+	margin: 0 0 10px 0!important;
+}
+
+.login {
+	padding: 20px!important;
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import s from './style.module.css'
 import { Field, reduxForm } from 'redux-form'
 import {required} from '../../../utils/validation/validation'
+import {Link} from 'react-router-dom';
 
 const LogIn = props => {
 	return (
@@ -75,6 +76,12 @@ const LogIn = props => {
 					<dd className={s.center}>
 						<button className="button1">{props.regUser ? 'Register' : 'Login' }</button>
 					</dd>
+					<dt>&nbsp;</dt>
+					{!!props.errorByUser &&
+						<dd className={s.center}>
+							<Link to="/password/reset">Fogot your password?</Link>
+						</dd>
+					}
 				</dl>
 			</fieldset>
 		</form>
@@ -110,11 +117,6 @@ const LogPage = props => {
 									<div>
 										<button className={s.discordButton}>
 											<a href={props.useLink}>Discord </a>
-										</button>
-									</div>
-									<div>
-										<button className={s.youtubeButton}>
-											<a href={props.useLink}>YouTube </a>
 										</button>
 									</div>
 								</div> : <></>

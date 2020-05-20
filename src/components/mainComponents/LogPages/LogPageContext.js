@@ -10,6 +10,7 @@ const mapStateToProps = state => {
 	return {
 		errorByUser: state.userdata.error,
 		useLink: state.userdata.useLink,
+		isResetting: state.userdata.isResetting,
 	}
 }
 

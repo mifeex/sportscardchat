@@ -13,9 +13,10 @@
 }
 .error {
 	position: relative;
-	left: 30%;
-	width: 600px!important;
+	left: 35%;
+	width: 700px!important;
 	margin: 0 0 10px 0!important;
+	font-size: 13px!important;
 }
 .apiForm {
 	width: 40%!important;

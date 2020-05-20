@@ -6,7 +6,7 @@ import {withSuccessSearching} from '../../HOC/withSuccessSearching'
 import NewPost from './newPost'
 import {showPreview, showPreviewStatus, addNewPost, successPosting} from '../../../redux/newpost-reducer';
 import {getCategories} from '../../../redux/categories-reducer';
-import {Redirect} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 
 const mapStateToProps = state => {
 	return {
@@ -44,4 +44,5 @@ export default compose(
 		connect(mapStateToProps, {showPreview, showPreviewStatus, getCategories, addNewPost, successPosting}),
 		withAuthParams,
 		withSuccessSearching,
+		withRouter,
 	)(NewPostContext)

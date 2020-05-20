@@ -16,6 +16,7 @@ import LoginWithDiscord from './mainComponents/LogPages/withAPI/LoginWithDiscord
 import UserContext from './mainComponents/Users/UserContext'
 import GetInfuencer from './mainComponents/Categories/SeparateCategory/GetInfuencerContext'
 import SearchContext from './mainComponents/Search/SearchContext'
+import ResetContext from './common/reset/ResetContext'
 
 import {isAuth} from '../redux/user-reducer';
 
@@ -54,6 +55,8 @@ class MainAppComponent extends React.Component {
 					<Route path='/use/discord' render={() => <LoginWithDiscord />} />
 					<Route path="/user/:userId" render={() => <UserContext />} />
 					<Route path='/search' render={() => <SearchContext />} />
+					<Route path='/password/reset' render={() => <ResetContext />} />
+					<Route path='/password/change/:code' render={() => <ResetContext />} />
 				</div>
 			</div>
 		);

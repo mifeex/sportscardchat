@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {compose} from 'redux';
 
 const mapStateToPropsHoc = state => {
 	return {
@@ -12,13 +13,16 @@ export const withLoggedParams = (Component) => {
 
 	class RedirectComponent extends React.Component {
 		render() {
-			if (this.props.isAuthUser) return <Redirect to="/" />
+			if (this.props.isAuthUser) this.props.history.goBack()
 
 			return <Component {...this.props}/>	
 		}
-	}
+	}///
 
-	let ConnectedRedirectComponent = connect(mapStateToPropsHoc, {})(RedirectComponent)
+	let ConnectedRedirectComponent =  compose(
+			connect(mapStateToPropsHoc, {}),
+			withRouter,
+		)(RedirectComponent)
 
 	return ConnectedRedirectComponent
 }

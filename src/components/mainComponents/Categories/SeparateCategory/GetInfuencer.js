@@ -1,8 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {faTrophy} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SidebarContext from '../../Profile/posts/sidebar/SidebarContext';
 import Influencer from './Element/Influencer'
 

@@ -1,12 +1,16 @@
 import {getAPI} from '../api/getAPI';
+import {reset} from 'redux-form';
 
 const initialState = {
 	userAuthData: {},
 	userData: [],
 	userPost: [],
+	videoPath: [],
 	isAuth: false,
-	error: '',
 	successUpdate: false,
+	isResetting: false,
+	isSuccessChanging: false,
+	error: '',
 	image: '',
 }
 
@@ -22,6 +26,8 @@ const userReducer = (state = initialState, action) => {
 	const _checkUserAuth = data => {
 		if (data.resultCode === 0) {
 			newState.isAuth = true;
+			newState.isSuccessChanging = false;
+			newState.isResetting = false;
 		}
 		else {
 			newState.isAuth = false;
@@ -35,7 +41,6 @@ const userReducer = (state = initialState, action) => {
 	const _logoutUser = resultCode => {
 		newState.isAuth = false;
 		newState.userAuthData = {};
-		newState.error = ''
 	}
 
 	const _loginWithAPI = link => {
@@ -65,35 +70,73 @@ const userReducer = (state = initialState, action) => {
 		newState.image = values.image
 	}
 
+	const _saveNewVideo = path => {
+		newState.videoPath = path
+	}
+
+	const _resetError = () => {
+		newState.error = ''
+	}
+
+	const _saveResetCode = () => {
+		newState.isResetting = true
+	}
+
+	const _saveSuccess = () => {
+		newState.isSuccessChanging = true
+	}
+
     switch (action.type) {
 		case 'LOGIN-USERS':
 			_checkUserAuth(action.data);
+			_resetError();
 			return newState;
 
 		case 'LOGGED-OUT':
 			_logoutUser(action.resultCode)
+			_resetError();
 			return newState
 
 		case 'USING-API':
 			_loginWithAPI(action.link)
+			_resetError();
 			return newState;
 
 		case 'GET-USER-DATA':
 			_setUserData(action.data)
+			_resetError();
 			return newState
 
 		case 'GET-USER-POSTS':
 			_setUserPosts(action.posts)
+			_resetError();
 			return newState
 
 		case 'NEW-IMAGE':
 			_saveNewImage(action.values)
+			_resetError();
+			return newState
+
+		case 'NEW-VIDEO':
+			_saveNewVideo(action.path)
+			_resetError();
+			return newState
+
+		case 'RESET-CODE':
+			_saveResetCode()
+			return newState
+
+		case 'NO-ERROR-ERROR':
+			_resetError()
+			return newState
+
+		case 'SUCCESS':
+			_saveSuccess()
 			return newState
 
 		case 'ERROR':
 			_saveError(action.error)
 			return newState
-
 		default:
 			return state;
     }
@@ -104,9 +147,15 @@ let getUser = data => ({type: 'GET-USER-DATA', data})
 let loggedUserOut = resultCode => ({type: 'LOGGED-OUT', resultCode})
 let getUserPosts = posts => ({type: 'GET-USER-POSTS', posts})
 let loginWithAPI = link => ({type: 'USING-API', link});
-const saveImage = (image, successUpdate) => ({type: 'NEW-IMAGE', values: {image, successUpdate}})
+let saveSuccess = () => ({type: 'SUCCESS'})
 
-let saveError = error => ({type: 'ERROR', error});
+const saveCode = () => ({type: 'RESET-CODE'})
+const saveImage = (image, successUpdate) => ({type: 'NEW-IMAGE', values: {image, successUpdate}})
+const saveVideoPath = path => ({type: 'NEW-VIDEO', path})
+
+export let saveError = error => ({type: 'ERROR', error});
+let resetError = () => ({type: 'NO-ERROR'})
+
 export const loginUser = (data, way) => dispatch => {
 	getAPI.postValue(data, way)
 	.then(data => {
@@ -182,5 +231,57 @@ export const updateProfileImage = (userId, image) => dispatch => {
 		}
 	})
 }
+
+export const getVideoPath = userId => dispatch => {
+	getAPI.getQueriedParams(`videoPath/${userId}`)
+	.then(data => {
+		dispatch(saveVideoPath(data.result))
+	})
+}
+
+export const addYoutubeVideo = (data, userId) => dispatch => {
+	getAPI.postValue({data, userId}, `new/video`)
+	.then(data => {
+		if (data.resultCode === 0) {
+			dispatch(reset('NewVideo'))
+			dispatch(resetError())
+		}
+		else {
+			dispatch(saveError(data.error))
+		}
+	})
+}
+
+export const resetPassword = email => dispatch => {
+	getAPI.postValue(email, `password/reset`)
+	.then(data => {
+		dispatch(reset('reset'))
+		dispatch(saveCode())
+	})
+}
+
+export const callPassReset = data => dispatch => {
+	getAPI.postValue(data, `password/code/check`)
+	.then(data => {
+		dispatch(reset('resetPassword'))
+		dispatch(saveSuccess())
+	})
+}
+
+export const next = userId => dispatch => {
+	getAPI.getQueriedParams(`videoPath/${userId}/next`)
+	.then(data => {
+		dispatch(saveVideoPath(data.result))
+	})
+}
+
+export const prew = userId => dispatch => {
+	getAPI.getQueriedParams(`videoPath/${userId}/prew`)
+	.then(data => {
+		dispatch(saveVideoPath(data.result))
+	})
+}
+
+export const setInf = userId => dispatch => getAPI.getQueriedParams(`set/influencer/${userId}`)
 
 export default userReducer;

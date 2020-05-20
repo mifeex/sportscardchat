@@ -5,7 +5,6 @@ import { Field, reduxForm } from 'redux-form'
 import {required} from '../../../../utils/validation/validation'
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Redirect} from 'react-router-dom';
 
 const SearchForm = props => {
 	return (

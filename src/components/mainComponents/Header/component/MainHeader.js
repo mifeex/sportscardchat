@@ -6,19 +6,23 @@ const MainHeader = props => {
 		<div id="site-header">
 			<div className="chunk">
 				<div id="site-logo">
-					<Link className="site-logo" to="" title="Board index">Here should be site logo</Link>
+					<Link className="site-logo" to="">
+						<img alt="logo" style={{width: '100px', height: '150px'}} src={`http://localhost:4000/images/logo.jpg`}/>
+					</Link>
 					<p className="skiplink"><Link to="">Skip to content</Link></p>
 				</div>
 
 				<ul id="site-menu">
-					<li data-skip-responsive="true" className="site-menu"><Link to="" rel="help" title="Frequently Asked Questions">FAQ</Link></li>
+					<li data-skip-responsive="true" className="site-menu">
+						<Link to="/Influencers">Influencers</Link>
+					</li>
 					<li className="site-menu">
-						<Link to="" >Drop Down</Link>
-						<ul>
-							<li><Link to="">Lorem ipsum</Link></li>
-							<li><Link to="">Welcome to phpBB3</Link></li>
-							<li><Link to="">Frequently Asked Questions</Link></li>
-							<li><Link to="">BBCode example</Link></li>
+						<Link to="/">Categories</Link>
+						<ul>Chickenfootsoup#1
+							<li><Link to="/category/Breaks">Breaks</Link></li>
+							<li><Link to="/category/Sports cards">Sports cards</Link></li>
+							<li><Link to="/category/General chat">General chat</Link></li>
+							<li><Link to="/category/Discover">Discover</Link></li>
 						</ul>
 					</li>
 				</ul>

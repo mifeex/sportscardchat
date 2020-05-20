@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 // тупая компонента
 const UserStats = (props) => {
-	const avatar = props.img;
   const postCount = props.count;
   const date = props.joined;
   const user = props.name;
