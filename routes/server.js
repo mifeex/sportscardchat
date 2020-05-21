@@ -66,7 +66,7 @@ app.post('/check-user', userAuth);
 app.get('/', main);
 
 app.get('/use-discord', (req, res, next) => {
-	res.json({url: "https://discord.com/api/oauth2/authorize?client_id=707710666349477981&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fuse%2Fdiscord&response_type=code&scope=identify"})
+	res.json({url: "https://discord.com/api/oauth2/authorize?client_id=707710666349477981&redirect_uri=http%3A%2F%2Fsportscardchat.com%2Fuse%2Fdiscord&response_type=code&scope=identify"})
 })
 
 app.get('/category/:data', middleware.getQueryValue(`SELECT category, text as post, tag, p.date, username,
