@@ -1,6 +1,6 @@
 --
 -- MySQL 5.5.25
--- Mon, 18 May 2020 11:47:19 +0000
+-- Thu, 21 May 2020 12:18:24 +0000
 --
 
 CREATE TABLE `categories` (
@@ -25,49 +25,23 @@ CREATE TABLE `comment` (
    `comment_text` int(10) not null,
    `hasImage` tinyint(1) not null,
    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=25;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=26;
 
 INSERT INTO `comment` (`id`, `post`, `user`, `date`, `comment_text`, `hasImage`) VALUES 
 ('9', '58', '7', 'Sun May 17 2020', '23', '0'),
-('10', '58', '7', 'Sun May 17 2020', '24', '0'),
-('11', '58', '7', 'Sun May 17 2020', '25', '0'),
-('12', '58', '7', 'Sun May 17 2020', '26', '0'),
-('13', '58', '7', 'Sun May 17 2020', '27', '0'),
-('14', '58', '7', 'Sun May 17 2020', '28', '0'),
-('15', '59', '7', 'Sun May 17 2020', '29', '0'),
 ('16', '55', '7', 'Sun May 17 2020', '30', '0'),
-('17', '55', '7', 'Sun May 17 2020', '31', '0'),
-('18', '55', '7', 'Sun May 17 2020', '32', '0'),
-('19', '60', '7', 'Sun May 17 2020', '33', '0'),
-('20', '60', '7', 'Sun May 17 2020', '34', '0'),
-('21', '60', '7', 'Sun May 17 2020', '35', '0'),
-('22', '54', '7099', 'Sun May 17 2020', '36', '0'),
-('23', '54', '7099', 'Sun May 17 2020', '37', '0'),
-('24', '54', '7', 'Sun May 17 2020', '38', '0');
+('25', '60', '7', 'Wed May 20 2020', '39', '0');
 
 CREATE TABLE `comment_text` (
    `id` int(10) not null auto_increment,
    `comment_text` text not null,
    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=39;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=40;
 
 INSERT INTO `comment_text` (`id`, `comment_text`) VALUES 
 ('23', 'Hello world'),
-('24', 'Hello fucking world<strong> Yeah I`m crazy<i> s-o-b</i></strong> '),
-('25', 'Wow! This bumd ass shit working! I`m fucking happy'),
-('26', 'Shit!!! This shit working! FUCK!!!'),
-('27', 'Shit!!! This shit working! FUCK!!!'),
-('28', 'Yeah, \"Р—Р°РµР±РёСЃСЊ\"'),
-('29', 'Hello fucking world!!!'),
 ('30', 'Hello guy! I`m new here!!<ul>\n <li>Р‘Р»СЏС‚СЊ, РјРµРЅСЏ Р±РµСЃРёС‚ РґРµСЂСЊРјРѕ СЃ С‚РµРј, С‡С‚Рѕ РІСЃС‚Р°РІРєР° РґРµР»Р°РµС‚СЃСЏ РЅР° РѕРґРёРЅ С€Р°Рі РЅР°Р·Р°Рґ Рё РїРѕР»СѓС‡Р°РµС‚СЃСЏ РєР°РєР°СЏ-С‚Рѕ Р·Р°РґРЅРёС†Р°</li> \n<li>Damn it, shit infuriates me with the fact that the insertion is done one step back and it turns out some kind of ass</li>\n</ul>'),
-('31', 'Hello shit'),
-('32', 'Hello shit'),
-('33', 'Hello fucking piece of shit'),
-('34', 'Hello fucking piece of shit'),
-('35', 'Hello fucking piece of shit. I`m crazy!!'),
-('36', 'Hello crazy man! I`m testing this'),
-('37', 'Hey man, you`re crazy'),
-('38', 'WTF? Why I`m Mifeex? Because you use cookie!');
+('39', 'Hello! It should working okay!');
 
 CREATE TABLE `main` (
    `id` int(10) unsigned not null auto_increment,
@@ -119,7 +93,7 @@ INSERT INTO `post` (`id`, `post_category`, `counts`, `tag`, `user_data`, `date`,
 ('57', '5', '0', 'Hi guy', '7099', 'Thu May 14 2020', '116', '0', '0'),
 ('58', '3', '6', 'Sorry. Goodbye. Hi', '7099', 'Fri May 15 2020', '118', '0', '14'),
 ('59', '2', '1', 'Hello! Guy', '7099', 'Fri May 15 2020', '119', '0', '15'),
-('60', '2', '3', 'I want to test new', '7', 'Sat May 16 2020', '120', '1', '21');
+('60', '2', '4', 'I want to test new', '7', 'Sat May 16 2020', '120', '1', '25');
 
 CREATE TABLE `post_text` (
    `id` int(10) not null auto_increment,
@@ -158,10 +132,24 @@ CREATE TABLE `user` (
    `email` varchar(30),
    `hasImage` tinyint(1) not null,
    `image` mediumtext not null,
+   `admin` tinyint(1) not null,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=7100;
 
-INSERT INTO `user` (`id`, `username`, `password`, `date`, `posts`, `influencer`, `email`, `hasImage`, `image`) VALUES 
-('7', 'Evgeny', '$2b$10$QU2iKf5kGdiAQ3LtZb31fuGdmsLxwtadsc8IoHJVJYYH5yM/Ovgh2', 'Fri May 08 2020', '7', '1', 'tevgeiy@mail.ru', '1', 'http://localhost:4000/userPhoto/addedpic_7.jpg'),
-('9', 'sportscard', '$2b$10$2pi3Frt4f5ZzcLVKAYJgX.Twcuwn7pTeJ9SovxSOgmFEWSPbtb0Y6', 'Wed May 13 2020', '0', '0', 'dsv1409@mail.ru', '0', ''),
-('7099', 'MifeeX', '', 'Wed May 13 2020', '5', '0', '', '1', 'https://cdn.discordapp.com/avatars/552879238601113621/0049126ec586085210d950946570a279.png?size=512');
+INSERT INTO `user` (`id`, `username`, `password`, `date`, `posts`, `influencer`, `email`, `hasImage`, `image`, `admin`) VALUES 
+('7', 'Evgeny', '$2b$10$MrUK42piKLLxV8HPmM.GA.Pg8ckSTSf7JkWjdCkQ0Hj7uVri.ZVNm', 'Fri May 08 2020', '7', '1', 'tevgeiy@mail.ru', '1', 'http://localhost:4000/userPhoto/addedpic_7.jpg', '0'),
+('9', 'sportscard', '$2b$10$2pi3Frt4f5ZzcLVKAYJgX.Twcuwn7pTeJ9SovxSOgmFEWSPbtb0Y6', 'Wed May 13 2020', '0', '1', 'dgprevo@gmail.com', '0', '', '1'),
+('7099', 'MifeeX', '', 'Wed May 13 2020', '5', '0', '', '1', 'https://cdn.discordapp.com/avatars/552879238601113621/0049126ec586085210d950946570a279.png?size=512', '0');
+
+CREATE TABLE `youtube` (
+   `id` int(10) not null auto_increment,
+   `userId` bigint(20) not null,
+   `path` varchar(15),
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=20;
+
+INSERT INTO `youtube` (`id`, `userId`, `path`) VALUES 
+('15', '7', 'Va9UKGs1bwI'),
+('17', '7', 'weofpA94SP0'),
+('18', '7', 'UtaE7Yh1W3g'),
+('19', '7', 'orEXY_lLL7s');
