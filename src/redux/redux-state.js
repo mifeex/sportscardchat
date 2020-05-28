@@ -1,7 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import commentReducer from './comment-reducer';
 import profileReducer from './profile-reducer';
-import userReducer from './user-reducer';
+import userReducer from './user-reducer.js';
 import categoriesReducer from './categories-reducer';
 import searchReducer from './search-reducer';
 import newPostReducer from './newpost-reducer'

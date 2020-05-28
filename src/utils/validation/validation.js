@@ -5,7 +5,7 @@ export const required = value => {
 }
 
 export const isQute = value => {
-	if (value.includes("'")) return `You use "'" symbol which is prohibited`;
+	if (value.includes("'") || value.includes("http://") || value.includes("javascript:void") || value.includes("javascript(")) return `You use "'" symbol which is prohibited`;
 
 	return undefined
 }

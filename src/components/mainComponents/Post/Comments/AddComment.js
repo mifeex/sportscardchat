@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import openSocket from 'socket.io-client'
 // тупая компонента.
 
-const socket = openSocket('http://localhost:8000/')
+const socket = openSocket('https://sportscardchat.com:8000')
 
 let CommentForm = props => {
 	return (

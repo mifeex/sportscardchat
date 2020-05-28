@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import ResetPage from './ResetPage';
-import {resetPassword, callPassReset, saveError} from '../../../redux/user-reducer';
+import {resetPassword, callPassReset, saveError} from '../../../redux/user-reducer.js';
 import {withLoggedParams} from '../../HOC/withLoggedParams';
 import {withSuccessSearching} from '../../HOC/withSuccessSearching';
 import {withRouter} from 'react-router-dom';

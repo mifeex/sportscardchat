@@ -23,7 +23,7 @@ const Body = (props) => {
           <p className={s.author}><Link to="/date" >{date}</Link> </p>
           <div className={s.content} style={{whiteSpace: "pre"}} dangerouslySetInnerHTML={{__html: text}}></div>
           <div>
-           {!!props.hasImage ? <img className={s.image} src={`http://localhost:4000/images/addedpic_${tag}.jpg`} /> : <></>}
+           {!!props.hasImage ? <img className={s.image} src={`https://sportscardchat.com:4000/images/addedpic_${tag}.jpg`} /> : <></>}
           </div>
         </div>
       </div>

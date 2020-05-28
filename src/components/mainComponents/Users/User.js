@@ -87,7 +87,7 @@ const User = (props) => {
 												props.isSuccess ? 
 													`${props.newImage}` : 
 													`${props.userData.image}`
-											: `http://localhost:4000/userPhoto/addedpic_default.jpg`
+											: `https://sportscardchat.com:4000/userPhoto/addedpic_default.jpg`
 										}/>
 								</label>
 								{props.isAuth && props.userData.id === props.userAuthId ? 

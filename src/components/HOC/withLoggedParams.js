@@ -13,7 +13,7 @@ export const withLoggedParams = (Component) => {
 
 	class RedirectComponent extends React.Component {
 		render() {
-			if (this.props.isAuthUser) this.props.history.goBack()
+			if (this.props.isAuthUser) this.props.history.push("/")
 
 			return <Component {...this.props}/>	
 		}
