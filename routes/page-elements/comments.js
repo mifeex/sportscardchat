@@ -1,6 +1,27 @@
 const app = require('express')()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
+const https = require('https')
+const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+
+const options = {
+    pfx: fs.readFileSync('../sportscardchat.pfx'),
+    passphrase: 'RHW6XnZx5Gqtg'
+};
+
+const corsOptions = {
+	origin: true,
+	methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
+	credentials: true,
+	maxAge: 3600,
+	origin: 'https://sportscardchat.com',
+	optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
+
+const server = https.createServer(options, app)
+const io = require('socket.io')(server)
 const multer = require('multer');
 
 const port = 8000
@@ -26,8 +47,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage, dest: './images/' })
 
-app.post('/', upload.any('addedpic'), (req, res, next) => {
-	res.sendFile('../../public/index.html')
+app.get('/comments', (req, res, next) => {
+	path.resolve(__dirname + '../../index.html')
 })
 
 class Database {
@@ -89,6 +110,6 @@ io.on('connection', (socket) => {
 })
 
 
-http.listen(port, () => {
-	console.log(`listening on *:${port}`)
+server.listen(port, 'sportscardchat.com', () => {
+	console.log(server.address())
 })

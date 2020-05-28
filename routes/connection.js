@@ -1,10 +1,11 @@
 const connection = {
-    connectionLimit: 10,
+    connectionLimit: 2500,
     host: "localhost",
     user: "root",
-    password: "",
+    password: "AC7JSQkhW8UzFKNZ",
     database: "forum",
-    multipleStatements: true
+    multipleStatements: true,
+    insecureAuth : true
 };
 
 module.exports = connection;

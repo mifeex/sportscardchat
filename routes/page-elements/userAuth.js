@@ -18,7 +18,7 @@ const date = new Date();
 let resultCode = 1;
 
 client.setScopes('identify');
-client.setRedirect('http://localhost:3000/use/discord');
+client.setRedirect('https://sportscardchat.com/#/use/discord');
 
 router.use(bodyParser.json());
 
@@ -134,7 +134,6 @@ router.get('/login', async (req, res, next) => {
 						email: req.session.email
 					})
 				})
-				pool.end()
 			}
 			else {
 				res.json({
@@ -144,7 +143,6 @@ router.get('/login', async (req, res, next) => {
 				})
 			}
 		})
-		pool.end()
 	}
 })
 

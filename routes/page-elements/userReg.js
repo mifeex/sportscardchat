@@ -40,7 +40,7 @@ router.post('/register-user', (req, res, next) => {
 
 		if (err) {
 			resultCode = 1
-			return res.status(500).json({resultCode, errorFromServer: `Something go wrong: ${err}!`})
+			return res.status(500).json({resultCode, error: `Something go wrong: ${err}!`})
 		}
 		
 		if (result === undefined || result.length < 1) { // if user not register
@@ -48,16 +48,17 @@ router.post('/register-user', (req, res, next) => {
 
 				if (err) {
 					resultCode = 1
-					return res.status(500).json({resultCode, errorFromServer: `Something go wrong: ${err}!`})
+					return res.status(500).json({resultCode, error: `Something go wrong: ${err}!`})
 				}
 
 				else {
-					pool.query(`INSERT INTO user(username, password, date, posts, influencer, email, hasImage) 
-								VALUES ('${username}', '${hash}', '${date.toDateString()}', 0, 0, '${email}', 0)`, 
+					pool.query(`INSERT INTO user(username, password, date, posts, influencer, email, hasImage, image, admin) 
+								VALUES ('${username}', '${hash}', '${date.toDateString()}', 0, 0, '${email}', 0, 0, 0)`, 
 					(err, result2) =>{
 						if (err) {
 							resultCode = 1;
-							return res.status(500).json({resultCode, errorFromServer: `Something go wrong: ${err}!`})
+							console.log(err)
+							return res.status(500).json({resultCode, error: `Something go wrong: ${err}!`})
 						}
 
 						else { //if everything "ok"
@@ -76,7 +77,6 @@ router.post('/register-user', (req, res, next) => {
 						}
 
 					})
-					pool.end()
 				}
 			});
 		}
@@ -86,7 +86,6 @@ router.post('/register-user', (req, res, next) => {
 			return res.json({resultCode, error: `This username or email already !exists!`})
 		}
 	})
-	pool.end()
 })
 
 module.exports = router
