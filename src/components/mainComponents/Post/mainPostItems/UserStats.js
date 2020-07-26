@@ -15,7 +15,7 @@ const UserStats = (props) => {
               src={
                   !!props.hasImage ? 
                     `${props.image}`
-                  : `http://104.168.156.246:4000/userPhoto/addedpic_default.jpg`
+                  : `https://sportscardchat.com:4000/userPhoto/addedpic_default.jpg`
                 }/>
           </div>
           <Link to={`/user/${userId}`} className="username-coloured" style={{color: '#00AA00'}}>{user}</Link>

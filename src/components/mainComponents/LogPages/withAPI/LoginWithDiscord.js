@@ -4,6 +4,7 @@ import {compose} from 'redux'
 import {redirectWithDiscord, isAuth} from '../../../../redux/user-reducer';
 import {Redirect} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
+import {withFetching} from '../../../HOC/withFetching'
 
 const mapStateToProps = state => {
 	return {
@@ -33,4 +34,5 @@ class LoginWithDiscord extends React.Component {
 export default compose(
 		connect(mapStateToProps, {redirectWithDiscord, isAuth}),
 		withRouter,
+		withFetching,
 	)(LoginWithDiscord)

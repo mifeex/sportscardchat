@@ -8,6 +8,7 @@ const PostBody = props => {
   let type = ''
 
   props.hasPost ? type = 'category' : type = 'post';
+  if (props.comment === 'comment') return type = 'comment'
 
   return ( 
     <div className="forabg">
@@ -27,22 +28,22 @@ const PostBody = props => {
         </ul>
         <ul className="topiclist forums" style={{backgroundColor: '#FAFAFA'}}>
           {
-            props.elements.map(cat => {
-              return <Post
-                        postBody={cat.post}
-                        type={type}
-                        username={cat.username}
-                        tag={cat.tag}
-                        date={cat.date}
-                        userId={cat.userId}
-                        postId={cat.postId}
-                        category={cat.category}
-                        key={cat.id}
-                        count={cat.counts}
-                        file={props.file}
-                        hasImage={cat.hasImage}
-              />
-            }) 
+              props.elements.map(cat => {
+                return <Post
+                          postBody={cat.post}
+                          type={type}
+                          username={cat.username}
+                          tag={cat.tag}
+                          date={cat.date}
+                          userId={cat.userId}
+                          postId={cat.postId}
+                          category={cat.category}
+                          key={cat.id}
+                          count={cat.counts}
+                          file={props.file}
+                          hasImage={cat.hasImage}
+                />
+              }) 
           }
         </ul>
      </div>

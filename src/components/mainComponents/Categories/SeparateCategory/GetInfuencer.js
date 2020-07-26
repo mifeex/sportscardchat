@@ -4,17 +4,12 @@ import SidebarContext from '../../Profile/posts/sidebar/SidebarContext';
 import Influencer from './Element/Influencer'
 
 const GetInfuencer = props => {
-
-	let user = ''
-	let date = ''
-	let userId = ''
+	let elements = []
 	let count = 0
 
-	if (props.influencers !== undefined) {
-		user = props.influencers[0].username
-		date = props.influencers[0].date
-		userId = props.influencers[0].id
-		count = props.totalCount[0].count
+	if (props.influencers.length >= 1) {
+		elements = props.influencers[0].influencer
+		count = props.influencers[0].count.count
 	}
 
 	return (
@@ -29,16 +24,17 @@ const GetInfuencer = props => {
 									<dl className="icon">
 										<dt>
 											<div className="list-inner">
-												<Link to="/">Influencers</Link>
+												<Link to="/">Content Creators</Link>
 											</div>
 										</dt>
-										<dd className="lastpost">Influencer </dd>
+										<dd className="lastpost">Content Creator </dd>
+										<dd className="posts">Joined </dd>
 									</dl>
 								</li>
 							</ul>
 							<ul className="topiclist forums" style={{backgroundColor: '#FAFAFA'}}>
 							{props.influencers !== undefined && props.totalCount !== undefined ?
-								props.influencers.map(e => {
+								elements.map(e => {
 									return <Influencer key={e.id}
 														count={count}
 														user={e.username}

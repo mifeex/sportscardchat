@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Navigation from './component/navigation'
 import MainHeader from './component/MainHeader'
 import {Search} from '../../../redux/search-reducer';
+import {withFetching} from '../../HOC/withFetching'
 
 const mapStateToProps = state => {
 	return {

@@ -4,6 +4,7 @@ import Sidebar from './SidebarComponents/Sidebar';
 import PopularPost from './SidebarComponents/PopularPost';
 import {Link} from 'react-router-dom';
 import {loginUser} from '../../../../../redux/user-reducer';
+import {withFetching} from '../../../../HOC/withFetching'
 
 class SidebarContent extends React.Component {
 
@@ -12,10 +13,14 @@ class SidebarContent extends React.Component {
 	}
 
 	render() {
+
+		let popularPost = []
+		this.props.popularPost.length >= 1 ? popularPost = this.props.popularPost[0] : popularPost = []
+
 		return (
 			<div id="sidebar">
 				{this.props.isAuthUser ?
-				<div className="side-block side-login">		
+				<div className="side-block side-login">
 					<h4 className="side-block-head">
 						Welcome, <Link to={`/user/${this.props.authUser.userId}`}>
 							{this.props.authUser.email}
@@ -27,7 +32,7 @@ class SidebarContent extends React.Component {
 					<h4 className="side-block-head">Popular posts</h4>
 						<div className="side-block-body" id="sidebar-recent-posts">
 							{
-								this.props.popularPost.map(cat => {
+								popularPost.map(cat => {
 									return <PopularPost
 										post={cat.post}
 										username={cat.username}

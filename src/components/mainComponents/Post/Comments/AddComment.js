@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react'
 import s from './comments.module.css';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import AddValueBlock from '../../../common/AllPost/addValueBlock';
@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import openSocket from 'socket.io-client'
 // тупая компонента.
 
-const socket = openSocket('https://sportscardchat.com:8000')
+const socket = openSocket('https://sportscardchat.com:8000/')
 
 let CommentForm = props => {
 	return (
@@ -32,22 +32,29 @@ CommentForm = connect(state => {
 	}
 })(CommentForm)
 
-class AddComment extends React.Component {
-	addPost = (e) => {
-		socket.emit('comment', {message: e.message, userId: this.props.userId, postId: this.props.postId[0][0].postId})
+const AddComment = props => {
+
+	const messagesEndRef = useRef(null)
+
+	const scrollToBottom = () => {
+		messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
 	}
 
-	componentDidMount() {
-		socket.on('user-commented', data => {
-			this.props.addPost(data[0]);
-		})
+	useEffect(scrollToBottom, [props]);
+
+	const addComment = (e) => {
+		socket.emit('comment', {message: e.message, userId: props.userId, postId: props.postId[0][0].postId})
 	}
 
-	render() {
-		return (
-			<CommentForm onSubmit={this.addPost}/>
-		)
-	}
+	socket.on('user-commented', data => {
+		props.addPost(data[0]);
+	})
+
+	return (
+		<div ref={messagesEndRef}>
+			<CommentForm {...props} onSubmit={addComment}/>
+		</div>
+	)
 }
 
 export default AddComment;

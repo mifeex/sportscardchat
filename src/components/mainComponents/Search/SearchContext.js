@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux'
 import {withRouter} from 'react-router-dom'
 import PostBody from '../../common/AllPost/PostBody';
+import {withFetching} from '../../HOC/withFetching'
 
 const mapStateToProps = state => {
 	return {

@@ -1,13 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {compose} from 'redux';
+
 import Posts from './posts'
 import {params} from '../../../../api/getAPI';
-import {withRouter} from 'react-router-dom'
 import {getCategoryPost, getPage, setPopularPost} from '../../../../redux/profile-reducer';
-import {compose} from 'redux';
-import {withSuccessSearching} from '../../../HOC/withSuccessSearching'
+import {setFetching} from '../../../../redux/categories-reducer';
 
-class PostsConnect extends React.Component{
+
+import {withSuccessSearching} from '../../../HOC/withSuccessSearching'
+import {withFetching} from '../../../HOC/withFetching'
+
+class PostsConnect extends React.PureComponent{
 	constructor(props) {
 		super(props)
 
@@ -30,7 +35,20 @@ class PostsConnect extends React.Component{
 		this.props.getCategoryPost(params);
 	}
 
+	componentDidUpdate(prevProps) {
+	// Популярный пример (не забудьте сравнить пропсы):
+		if ((this.props.match.params.categoryId !== prevProps.match.params.categoryId) || (this.props.totalPostCount !== prevProps.totalPostCount)) {
+			params.extraPath = this.props.match.params.categoryId
+
+			this.props.setFetching(true);
+			this.props.setPopularPost();
+			this.props.getCategoryPost(params);
+		}
+	}
+
 	render() {
+
+
 		return(
 			<Posts
 				limit={this.props.limit} 
@@ -56,7 +74,8 @@ const mapStateToProps = state => {
 }
 
 export default compose(
-		connect(mapStateToProps, {getCategoryPost, getPage, setPopularPost}),
+		connect(mapStateToProps, {getCategoryPost, getPage, setPopularPost, setFetching}),
 		withRouter,
 		withSuccessSearching,
+		withFetching
 	)(PostsConnect)

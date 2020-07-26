@@ -7,6 +7,7 @@ import NewPost from './newPost'
 import {showPreview, showPreviewStatus, addNewPost, successPosting} from '../../../redux/newpost-reducer';
 import {getCategories} from '../../../redux/categories-reducer';
 import {Redirect, withRouter} from 'react-router-dom';
+import {withFetching} from '../../HOC/withFetching'
 
 const mapStateToProps = state => {
 	return {
@@ -45,4 +46,5 @@ export default compose(
 		withAuthParams,
 		withSuccessSearching,
 		withRouter,
+		withFetching
 	)(NewPostContext)

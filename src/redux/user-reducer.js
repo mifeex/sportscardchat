@@ -1,11 +1,13 @@
 import {getAPI} from '../api/getAPI';
 import {reset} from 'redux-form';
+import {setFetching} from './categories-reducer'
 
 const initialState = {
 	userAuthData: {},
 	userData: [],
 	userPost: [],
 	videoPath: [],
+	comments: [],
 	isAuth: false,
 	successUpdate: false,
 	isResetting: false,
@@ -86,6 +88,10 @@ const userReducer = (state = initialState, action) => {
 		newState.isSuccessChanging = true
 	}
 
+	const _saveComments = data => {
+		newState.comments = data
+	}
+
     switch (action.type) {
 		case 'LOGIN-USERS':
 			_checkUserAuth(action.data);
@@ -126,6 +132,11 @@ const userReducer = (state = initialState, action) => {
 			_saveResetCode()
 			return newState
 
+		case 'USER-COMMENT':
+			_saveComments(action.data)
+			_resetError();
+			return newState
+
 		case 'NO-ERROR-ERROR':
 			_resetError()
 			return newState
@@ -152,68 +163,84 @@ let saveSuccess = () => ({type: 'SUCCESS'})
 const saveCode = () => ({type: 'RESET-CODE'})
 const saveImage = (image, successUpdate) => ({type: 'NEW-IMAGE', values: {image, successUpdate}})
 const saveVideoPath = path => ({type: 'NEW-VIDEO', path})
+const setComments = data => ({type: 'USER-COMMENT', data})
 
 export let saveError = error => ({type: 'ERROR', error});
 let resetError = () => ({type: 'NO-ERROR'})
 
 export const loginUser = (data, way) => dispatch => {
+	setFetching(true)
 	getAPI.postValue(data, way)
 	.then(data => {
 		if (data.resultCode === 0) {
 			const {resultCode, userId, email} = data;
 			dispatch(checkUserAuth(resultCode, userId, email))
+			dispatch(setFetching(false))
 		}
 	  	else {
 	  		dispatch(saveError(data.error))
+	  		dispatch(setFetching(false))
 	  	}
 	})
 }
 
 export const isAuth = () => dispatch => {
+	setFetching(true)
 	getAPI.getAuth()
 	.then(data => {
 		if (data.resultCode === 0) {
 			const { resultCode, userId, email } = data;
 			dispatch(checkUserAuth(resultCode, userId, email))
+			dispatch(setFetching(false))
 		}
 		else {
 			dispatch(saveError(data.error))
+			dispatch(setFetching(false))
 		}
 	})
 }
 
 export const loggedOut = () => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams('logout')
 	.then(data => {
 		dispatch(loggedUserOut(data.resultCode))
+		dispatch(setFetching(false))
 	})
 }
 
 export const useDiscord = () => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams('use-discord')
 	.then(data => {
 		dispatch(loginWithAPI(data.url))
+		dispatch(setFetching(false))
 	})
 }
 
 export const redirectWithDiscord = url => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams(`login${url}`)
 	.then(data => {
 		if (data.resultCode === 0) {
 			const {resultCode, userId, email} = data;
 			dispatch(checkUserAuth(resultCode, userId, email))
+			dispatch(setFetching(false))
 		}
 		else {
 			dispatch(saveError(data.error))
+			dispatch(setFetching(false))
 		}
 	})
 }
 
 export const getAll = userId => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams(`get-user/${userId}`)
 	.then(data => {
 			dispatch(getUserPosts(data.result))
 			dispatch(getUser(data.totalCount[0]))
+			dispatch(setFetching(false))
 	})
 }
 
@@ -221,67 +248,102 @@ export const updateProfileImage = (userId, image) => dispatch => {
 	const form = new FormData();
 	form.append("addedpic", image, image.name)
 
+	setFetching(true)
 	getAPI.postImage(form, `update-photo/${userId}`)
 	.then(data => {
 		if (data.resultCode === 0) {
 			dispatch(saveImage(data.newImage, data.isSuccess))
+			dispatch(setFetching(false))
 		}
 		else {
 			dispatch(saveError(data.error))
+			dispatch(setFetching(false))
 		}
 	})
 }
 
 export const getVideoPath = userId => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams(`videoPath/${userId}`)
 	.then(data => {
 		dispatch(saveVideoPath(data.result))
+		dispatch(setFetching(false))
 	})
 }
 
 export const addYoutubeVideo = (data, userId) => dispatch => {
+	setFetching(true)
 	getAPI.postValue({data, userId}, `new/video`)
 	.then(data => {
 		if (data.resultCode === 0) {
 			dispatch(reset('NewVideo'))
 			dispatch(resetError())
+			dispatch(setFetching(false))
 		}
 		else {
 			dispatch(saveError(data.error))
+			dispatch(setFetching(false))
 		}
 	})
 }
 
 export const resetPassword = email => dispatch => {
+	setFetching(true)
 	getAPI.postValue(email, `password/reset`)
 	.then(data => {
 		dispatch(reset('reset'))
 		dispatch(saveCode())
+		dispatch(setFetching(false))
 	})
 }
 
 export const callPassReset = data => dispatch => {
+	setFetching(true)
 	getAPI.postValue(data, `password/code/check`)
 	.then(data => {
 		dispatch(reset('resetPassword'))
 		dispatch(saveSuccess())
+		dispatch(setFetching(false))
 	})
 }
 
 export const next = userId => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams(`videoPath/${userId}/next`)
 	.then(data => {
 		dispatch(saveVideoPath(data.result))
+		dispatch(setFetching(false))
 	})
 }
 
 export const prew = userId => dispatch => {
+	setFetching(true)
 	getAPI.getQueriedParams(`videoPath/${userId}/prew`)
 	.then(data => {
 		dispatch(saveVideoPath(data.result))
+		dispatch(setFetching(false))
 	})
 }
 
 export const setInf = userId => dispatch => getAPI.getQueriedParams(`set/influencer/${userId}`)
+
+export const addComment = (userId, value) => dispatch => {
+	setFetching(true)
+	getAPI.postValue({value, userId}, `new/user/comment`)
+	.then(data => {
+		dispatch(reset('NewComment'))
+		dispatch(setFetching(false))
+		dispatch(setComments(data.result))
+	})
+}
+
+export const showComment = userId => dispatch => {
+	setFetching(true);
+	getAPI.getQueriedParams(`get/comments/${userId}`)
+	.then(data => {
+		dispatch(setFetching(false))
+		dispatch(setComments(data.result))
+	})
+}
 
 export default userReducer;

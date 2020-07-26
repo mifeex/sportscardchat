@@ -5,6 +5,7 @@ import LogPage from './LogPage'
 import {loginUser, useDiscord} from '../../../redux/user-reducer';
 import {withLoggedParams} from '../../HOC/withLoggedParams';
 import {withSuccessSearching} from '../../HOC/withSuccessSearching'
+import {withFetching} from '../../HOC/withFetching'
 
 const mapStateToProps = state => {
 	return {
@@ -37,4 +38,5 @@ export default compose(
 		connect(mapStateToProps, {loginUser, useDiscord}),
 		withLoggedParams,
 		withSuccessSearching,
+		withFetching,
 	)(LogPageContext)

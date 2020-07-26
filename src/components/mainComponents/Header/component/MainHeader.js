@@ -14,7 +14,7 @@ const MainHeader = props => {
 
 				<ul id="site-menu">
 					<li data-skip-responsive="true" className="site-menu">
-						<Link to="/Influencers">Influencers</Link>
+						<Link to="/Influencers">Content Creators</Link>
 					</li>
 					<li className="site-menu">
 						<Link to="/">Categories</Link>

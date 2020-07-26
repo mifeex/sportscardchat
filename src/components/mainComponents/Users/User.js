@@ -2,11 +2,13 @@ import React from 'react';
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field, reduxForm } from 'redux-form';
-import {required} from '../../../utils/validation/validation';
+import {required, maxLengthCreator, isQute} from '../../../utils/validation/validation';
 import PostBody from '../../common/AllPost/PostBody';
 import YouTube from 'react-youtube';
 import s from './style.module.css';
 // тупая компонента.
+
+const maxLength = maxLengthCreator(100);
 
 let NewVideoForm = props => {
 	return (
@@ -14,7 +16,7 @@ let NewVideoForm = props => {
 			<fieldset className="fields1">
 			<dl style={{clear: 'left'}}>
 					<dt>
-						<Field validate={[required]}
+						<Field validate={[required, isQute]}
 								component="input"
 								name="videoPath"
 								placeholder="Enter path to your video"
@@ -30,6 +32,33 @@ let NewVideoForm = props => {
 		</form>
 	)
 }
+
+let NewSimpleComment = props => {
+	return (
+		<form onSubmit={props.handleSubmit}>
+			<fieldset className="fields1">
+			<dl style={{clear: 'left'}}>
+					<dt>
+						<Field validate={[required, maxLength, isQute]}
+								component="input"
+								name="yourNews"
+								placeholder={`Whats up ${props.name}?!`}
+								className="inputbox autowidth"
+								id="username"
+						/>
+					</dt>
+					<dt>
+						<button className="button1" type="submit">Share you news...</button>
+					</dt>
+				</dl>
+			</fieldset>
+		</form>
+	)
+}
+
+NewSimpleComment = reduxForm({
+	form: 'NewComment'
+})(NewSimpleComment)
 
 NewVideoForm = reduxForm({
 	form: 'NewVideo'
@@ -59,6 +88,10 @@ const User = (props) => {
 		path = e.videoPath
 
 		props.setYoutubePath(path)
+	}
+
+	const addComment = e => {
+		props.addNewComment(e.yourNews)
 	}
 
 	const setInf = () => {
@@ -96,12 +129,16 @@ const User = (props) => {
 							</div>
 							{
 								(props.userData.influencer && props.isAuth && props.userData.id === props.userAuthId) 
-								? <NewVideoForm onSubmit={addVideo} /> : <></>
+								? <>
+									<NewVideoForm onSubmit={addVideo} />
+									<NewSimpleComment name={props.userData.username} onSubmit={addComment} />
+								</>
+								: <></>
 							}
 						</div>
 						<div className="column2">
 							<dl className="details">
-								{props.userData.influencer ? <><dt>INFLUENCER</dt><dd><a href><FontAwesomeIcon icon={faTrophy} /></a></dd></> : <></>}
+								{props.userData.influencer ? <><dt>CONTENT CREATOR</dt><dd><a href><FontAwesomeIcon icon={faTrophy} /></a></dd></> : <></>}
 								<dt>NAME</dt><dd>{props.userData.username}</dd>
 								<dt>JOINED</dt><dd>{props.userData.date}</dd>
 								<dt>TOTAL POSTS</dt><dd>{props.userData.posts}</dd>
@@ -110,8 +147,21 @@ const User = (props) => {
 					</div>
 				</div>
 			</div>
+			{
+				props.userData.influencer && 
+				<>
+					<div>
+						<h2>User comments</h2>
+					</div>
+					<div id="forumlist">
+						<div id="forumlist-inner">
+							<PostBody file={props.file} elements={props.comments} hasPost={false} /> : <></>
+						</div>
+					</div>
+				</>
+			}
 			<div>
-				<h2>User's post</h2>
+				<h2>User posts</h2>
 			</div>
 			<div id="forumlist">
 				<div id="forumlist-inner">
@@ -121,7 +171,7 @@ const User = (props) => {
 			{props.userData.influencer && 
 				<>
 					<div>
-						<h2>User's videos</h2>
+						<h2>User videos</h2>
 					</div>
 
 					<div id="forumlist">
@@ -138,5 +188,3 @@ const User = (props) => {
 }
 
 export default User;
-
-

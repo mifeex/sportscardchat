@@ -6,6 +6,7 @@ import {getComments} from '../../../../redux/comment-reducer';
 import {withRouter} from 'react-router-dom'
 import {Link} from 'react-router-dom';
 import {withSuccessSearching} from '../../../HOC/withSuccessSearching'
+import {withFetching} from '../../../HOC/withFetching'
 
 const mapStateToProps = state => {
 	return {
@@ -40,4 +41,5 @@ export default compose(
 		connect(mapStateToProps, {getComments}),
 		withRouter,
 		withSuccessSearching,
+		withFetching,
 	)(CommentsContent)

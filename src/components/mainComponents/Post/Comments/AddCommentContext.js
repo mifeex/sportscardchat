@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import AddComment from './AddComment';
 import {withAuthParams} from '../../../HOC/withAuthParams'
 import {withSuccessSearching} from '../../../HOC/withSuccessSearching'
-import {addPost} from '../../../../redux/comment-reducer'
 import {compose} from 'redux'
+import {withFetching} from '../../../HOC/withFetching'
+import {addPost} from '../../../../redux/comment-reducer'
 
 const mapStateToProps = state => {
 	return {
@@ -17,4 +18,5 @@ export default compose(
 		connect(mapStateToProps, {addPost}),
 		withAuthParams,
 		withSuccessSearching,
+		withFetching,
 	)(AddComment)

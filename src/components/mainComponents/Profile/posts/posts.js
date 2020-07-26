@@ -6,6 +6,11 @@ import PostBody from '../../../common/AllPost/PostBody'
 //умная компанента. Умеет отрисовывать посты. 
 
 const Posts = props => {
+  let elements = []
+  
+  if (props.post.length >= 1) {
+    elements = props.post[0]
+  }
 
   return (
     <div>
@@ -19,7 +24,7 @@ const Posts = props => {
               page={props.page}
               pageChange={props.pageChange}
           />
-          <PostBody category={props.category} file={props.file} elements={props.post} hasPost={false} />
+          <PostBody category={props.category} file={props.file} elements={elements} hasPost={false} />
         </div>
       </div>
     </div>
