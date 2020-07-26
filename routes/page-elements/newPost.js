@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const gcsSharp = require('multer-sharp');
 
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 const config = require('../connection');
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express();
 const bodyParser = require('body-parser');
 
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 const config = require('../connection');
 const pool = mysql.createPool(config);
@@ -26,6 +26,7 @@ router.post('/search', (req, res, next) => {
 				return res.json({resultCode: 0, result2})
 			}
 	})
+	pool.end()
 })
 
 module.exports = router

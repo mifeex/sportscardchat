@@ -74,7 +74,7 @@ router.post('/password/reset', async (req, res, next) => {
         html: `<div>
                     <h3>Hello, ${data.data}</h3>
                     <div>Today you try to reset your password!
-                        If you still want to change you password use this <a href=${`https://sportscardchat.com/#/password/change/${checkCode}`}>
+                        If you still want to change you password use this <a href=${`http://localhost:3000/password/change/${checkCode}`}>
                             link
                         </a>
                     </div>

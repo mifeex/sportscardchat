@@ -7,15 +7,6 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const helmet = require('helmet');
 const xssFilter = require('x-xss-protection');
-const https = require('https')
-const fs = require('fs')
-
-const options = {
-    pfx: fs.readFileSync('sportscardchat.pfx'),
-    passphrase: 'RHW6XnZx5Gqtg'
-};
-
-const server = https.createServer(options, app)
 
 const middleware = require('./page-elements/getValue');
 const second_middleware = require('./page-elements/getSimpleValue');
@@ -34,7 +25,7 @@ const corsOptions = {
 	methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
 	credentials: true,
 	maxAge: 3600,
-	origin: 'https://sportscardchat.com',
+	origin: 'http://localhost:3000',
 	optionsSuccessStatus: 200
 }
 
@@ -75,7 +66,7 @@ app.post('/check-user', userAuth);
 app.get('/', main);
 
 app.get('/use-discord', (req, res, next) => {
-	res.json({url: "https://discord.com/api/oauth2/authorize?client_id=707710666349477981&redirect_uri=https%3A%2F%2Fsportscardchat.com%2Fuse%2Fdiscord&response_type=code&scope=identify"})
+	res.json({url: "https://discord.com/api/oauth2/authorize?client_id=707710666349477981&redirect_uri=http%3A%2F%2Fsportscardchat.com%2Fuse%2Fdiscord&response_type=code&scope=identify"})
 })
 
 app.get('/category/:data', middleware.getQueryValue(`SELECT category, text as post, tag, p.date, username,
@@ -127,6 +118,6 @@ app.get('/get/popular-post', second_middleware.getSimpleValue(`SELECT text as po
 	JOIN post_text pt ON p.post=pt.id
 	JOIN user u ON p.user_data=u.id ORDER BY p.counts DESC LIMIT 5`, 'getValue'))
 
-server.listen(port, 'sportscardchat.com', () => {
-	console.log(server.address())
+app.listen(port, () => {
+	console.log(`Server is running on Port ${port}`)
 })
