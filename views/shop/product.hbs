@@ -1,0 +1,147 @@
+<body>
+  
+  {{#each param }}
+            <div class="container-fluid">
+              <div>&nbsp;</div>
+              <div class="container-fluid">
+
+                                
+                  <article class="product" data-init="styleRoses.productDetails.init">
+
+        <div class="product-gallery clearfix">
+            <div class="product-title-container">
+                <div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 489px;"><ul id="gallery" class="layoutList" data-init="bxSlider" data-bxslider="{&quot;controls&quot;:false, &quot;mode&quot;:&quot;fade&quot;, &quot;pagerCustom&quot;:&quot;#gallery-pager&quot;, &quot;auto&quot;:true}" style="width: auto; position: relative;">
+                    <li style="float: none; list-style: none; position: absolute; width: 830px; z-index: 0; display: none;">
+                      <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}}">
+                    </li>
+                    <li style="float: none; list-style: none; position: absolute; width: 830px; z-index: 0; display: none;">
+                      <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}}">
+                    </li>
+                    <li style="float: none; list-style: none; position: absolute; width: 830px; z-index: 0; display: none;">
+                      <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}}">
+                    </li>
+                    <li style="float: none; list-style: none; position: absolute; width: 830px; z-index: 50; display: list-item;"> 
+                      <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}}">
+                    </li>
+                </ul></div><div class="bx-controls"></div></div>
+            </div>
+
+            <ul id="gallery-pager" class="layoutList layoutList-horizontal">
+                <li>
+                  <a data-slide-index="0" href="#" class="">
+                    <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}} - {{this.rose_type}} - {{this.brand}}" width="92" height="92">
+                  </a>
+                </li>
+                <li>
+                  <a data-slide-index="1" href="#" class="">
+                    <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}} - {{this.rose_type}} - {{this.brand}}" width="92" height="92">
+                  </a>
+                </li>
+                <li>
+                  <a data-slide-index="2" href="#" class="">
+                    <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}} - {{this.rose_type}} - {{this.brand}}" width="92" height="92">
+                  </a>
+                </li>
+                <li>
+                  <a data-slide-index="3" href="#" class="active">
+                    <img src="" data-img="_1.jpg" data-id="{{this.id}}" class="p img" alt="{{this.sort}} - {{this.rose_type}} - {{this.brand}}" width="92" height="92">
+                  </a>
+                </li>            
+            </ul>
+        </div>
+
+        <section class="withHeading">
+            <h2>{{this.sort}}</h2>
+                <p>
+                    <strong>Описание:</strong>             
+                </p>
+                <p class="MsoNormal"><span id="docs-internal-guid-f970b24c-7fff-205c-0f99-f1a2760fdc7c"><span style="font-size: 11pt; font-family: Calibri, sans-serif; color: rgb(0, 0, 0); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">{{this.description}}</span></span></p>
+
+            
+                            <div class="">
+                                <table id="dataTable" class="table thead-light">
+                                 <thead>
+                                    <tr>
+                                      <th scope="col">Производитель:</th>
+                                      <th scope="col">Цвет:</th>
+                                      <th scope="col">Форма цветка:</th>
+                                      <th scope="col">Высота:</th>
+                                      <th scope="col">Группа:</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+
+                                      <td><a class="link"> {{this.brand}}</a></td>
+                                      <td><a class="link"> {{this.color}}</a></td>
+                                      <td><a class="link"> {{this.flower_form}}</a></td>
+                                      <td><a class="link"> {{this.heigh}}</a> см</td>
+                                      <td><a class="link"> {{this.rose_type}}</a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                    </section>
+
+        <section class="addToCart clearfix">
+          <div class="clearfix">
+            <div class="heading" style="min-width: 323px;"></div>
+            <div class="clearfix">
+              <div class="heading">
+                <h2>Купить продукт</h2>
+                <h3>Цена: <strong>{{this.cost}}</strong> руб</span></h3>
+
+                <div class="addToCartForm">
+                <form id="formElem">
+                  <button class="btn btn-primary pull-right add-into-cart" data-sort="{{this.sort}}" type="submit">В корзину
+                    <i class="fas fa-shopping-cart ml-1"></i></button>
+                </form>
+
+                </div>
+              </div>
+            </div>                            
+          </div>
+        </section>
+      {{/each}}
+</div>
+</div>
+
+<hr class="white">
+
+<div class="row wow fadeIn">
+
+        <!--Grid column-->
+        {{#each product}}
+        <div class="col-lg-3 col-md-12 mb-3">
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top img" src="" alt="Другие товары, которые мы хотим предложить {{this.sort}}">
+                  
+            <div class="card-body">
+              <h5 class="card-title">{{this.sort}}</h5>
+                <div class="card-text">
+                  <a style="" data-img="_1.jpg" data-id="{{this.id}}" class="p" data-brand="{{this.brand}}" data-color="{{this.color}}" data-form="{{this.flower_form}}" data-height="{{this.heigh}}" data-rose-type="{{this.rose_type}}"></a>  
+                  <p>{{this.cost}} рублей</p>
+                </div>        
+              <a href="/product/{{this.sort}}" class="btn btn-primary pull-right">Подробнее</a>
+            </div>
+          </div>
+
+        </div>
+        {{/each}}
+        <!--Grid column-->
+  </div>
+
+<div class="container-fluid">
+	<div class="row">
+
+	</div>
+</div>
+	
+		</div>
+	</div>
+	<div class="footer">
+		<!--  -->
+	</div>
+</body>
+</html>

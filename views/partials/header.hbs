@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar bg-light navbar-light">
+    <a href="/" class="navbar-brand text-uppercase header" style="margin-bottom: 10px;">Королевство Роз</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link text-uppercase text-primary" href="/">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-primary" href="">О нас</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-uppercase text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Каталог
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/all">Розы</a>
+          <a class="dropdown-item" href="#">Удобрения</a>
+        </div>
+      </li>
+        <li class="nav-item">
+          <form action="/cart" method="get">
+            <button data-counter class="btn btn-outline-primary cart"><i data-counter class="fas fa-shopping-basket" style="margin-top: 5px;"></i></button>
+            <span class="badge badge-primary badge-pill" id="count">{{session.totalQty}}</span>          
+          </form>
+
+        </li>
+      </ul>
+        <form id="findForm" class="form-inline" action="/search" method="get">
+            <input class="form-control mr-sm-2 find_field" style="margin-top: 5px;" type="text" placeholder="Искать" name="keyword">
+          <button class="btn btn-outline-primary find" style="margin-top: 5px;" type="submit">Искать</button>
+        </form>
+    </div>
+  </nav>
+<div class="alert alert-warning" id="alert" role="alert">
+  Поле поиска не содержит данных!
+</div>

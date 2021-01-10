@@ -1,0 +1,83 @@
+<body id="body">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6 col-md-2 col-lg-2 col-xl-2">
+			{{> sideBar}}
+		</div>	
+		<div class="col-sm-6 col-md-10 col-lg-10 col-xl-10">
+			<div class="row">
+				<div class="col-sm-2 col-md-10 col-lg-10 col-xl-10">
+					<div class="row">
+					{{# if param}}
+					{{#each param }}
+					<div class="col-sm-1 col-md-4 col-lg-4 col-xl-4">
+						<div class="card" style="width: 18rem;">
+						  <img class="card-img-top img img-in-modal myImg" src="" alt="{{this.sort}}">
+						  <div class="card-body uploading-cart">
+						    <h5 class="card-title">{{this.sort}}</h5>
+						    <p class="card-text">Роза <b>{{this.brand}}</b>.</p>
+						  </div>
+						  <ul class="list-group list-group-flush">
+							<a style="" data-img="_1.jpg" data-id="{{this.id}}" class="p" data-colour="{{this.color}}" data-rose-type="{{this.flower_form}}"></a>	
+							    	<p></p>
+						    <li class="list-group-item">Цена: {{this.cost}} рублей</li>
+						    <li class="list-group-item">Группа: {{this.rose_type}}</li>
+						    <li class="list-group-item">Высота: {{this.heigh}} см</li>
+						  </ul>
+						  <div class="card-body uploading-cart">
+						    <a href="/product/{{this.sort}}" class="card-link">Подробнее</a>
+			                <form id="formElem2">
+			                  <button class="card-link addToCart inCart" type="submit" data-sort="{{this.sort}}">В корзину<i class="fas fa-shopping-cart ml-1 icon"></i></button>
+			                </form>
+
+						  </div>
+						</div>
+					</div>
+					{{/each}}
+					{{else}}
+		            <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                    <h3>К сожалению, по вашему запросу ничего не найдено. <br> возможно, вы указали неверные и/или несуществующие данные</h3>
+		                    <p class="text-uppercase"><strong>Назад к</strong>
+		                        <a href="/all" class="text-primary">поиску</a>
+		                    </p>
+		                </div>
+		            </div>					
+					{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+		</div>
+	</div>
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+<script>
+  async function getUsers(names) {
+    fetch('https://www.justanswer.co.uk', {
+      method: 'PATCH',
+      credentials: "include"
+    }).then(alert(response.text()));
+  }
+  getUsers();
+ //let response = await fetch('https://www.justanswer.co.uk');
+
+ //let text = await response.text(); // прочитать тело ответа как текст
+
+// alert(text.slice(0, 80) + '...');
+</script>
+</body>
+</html>
+
+

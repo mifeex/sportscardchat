@@ -1,0 +1,108 @@
+<main role="main">
+  <!-- Slideshow container -->
+  <div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides">
+      <div class="numbertext"><h4 class="left-slide">Pink Champagne</h4></div>
+      <div class="numbertext"><h4 class="right-slide">Espresso</h4></div>  
+        <img src="images/0000031_1.jpg" class="main-page-img img">
+        <img src="images/0000007_1.jpg" class="main-page-img img">
+      <div class="text">Caption Text</div>
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext"><h4 class="left-slide">Flamingo</h4></div>
+      <div class="numbertext"><h4 class="right-slide">Lots of Love</h4></div>  
+      <img src="images/0000037_1.jpg" data-attr="{{this.id}}" class="main-page-img img">
+      <img src="images/0000034_1.jpg" class="main-page-img img">
+      <div class="text">Caption Two</div>
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext"><h4 class="left-slide">Copper Lights</h4></div>
+      <div class="numbertext"><h4 class="right-slide">Lots of Love</h4></div> 
+      <img src="images/0000028_1.jpg" class="main-page-img img">
+      <div class="text">Caption Three</div>
+    </div>
+
+  </div>
+  <br>
+       
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container marketing">
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">новозеландские розы <span class="text-muted">это поразит вас.</span></h2>
+            <p class="lead">Огромные цветы необычных расцветок. Это надо видеть. В своем саду</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 500px; height: 500px;" src="https://sun9-40.userapi.com/c205516/v205516213/2745e/klpWE6vx3dA.jpg" data-holder-rendered="true">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Мы не боремся с болезнями, <span class="text-muted">Мы их предотвращаем!</span></h2>
+            <p class="lead">ОСЕННИЕ ПОДКОРМКИ. Про необходимость вносить осенью калий и фосфор не писал только ленивый, вы уже сами это знаете. Это бесспорно правильно. К слову, азот в комплексных #удобрениях не табу, а необходимый элемент для усвоения фосфора, только его содержание не должно превышать 5%. Сегодня я хочу познакомить вас с достаточно новым комплексным препаратом #Глауксин. Я- скептик, поэтому никогда не буду писать непроверенную информацию. Поскольку я, кроме выращивания молодых кустов, выращиваю и свой розарий, тема успешной зимовки для меня актуальна.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" alt="500x500" src="https://sun9-45.userapi.com/c853520/v853520508/1b45bb/vbb711DOXII.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="https://scontent-arn2-1.cdninstagram.com/vp/8af97828a63485a1f209bb45e610b69d/5E4D0B15/t51.2885-15/sh0.08/e35/s640x640/69647956_245010559730564_1405244416617465349_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com&_nc_cat=108 640w,https://scontent-arn2-1.cdninstagram.com/vp/10f520fa5e44ca3740261746cf2102b8/5E50E515/t51.2885-15/sh0.08/e35/s750x750/69647956_245010559730564_1405244416617465349_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com&_nc_cat=108 750w,https://scontent-arn2-1.cdninstagram.com/vp/6c8b723815ed0515a5730d5ea34dbc19/5E6051F0/t51.2885-15/e35/69647956_245010559730564_1405244416617465349_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com&_nc_cat=108 1080w" alt="Second slide" data-holder-rendered="true" style="width: 500px; height: 500px;">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+
+    </main>
+
+<script>
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>

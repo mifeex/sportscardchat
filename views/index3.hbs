@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Panel</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="first">{{#each param}}   	
+	<form action="/uplowfvjbb-ad-{{this.id}}-{{this.desciptionId}}" id="save" method="get">
+	  <div class="form-group">
+		
+	    <label for="exampleFormControlInput1">Название сорта</label>
+	    <input type="text" class="form-control" id="exampleFormControlInput1" autocomplete="off" name="sort" placeholder="Название сорта" value="{{this.sort}}">
+	      {{/each}}
+	    </select>
+
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleFormControlSelect1">Название формы цветка</label>
+	    <select class="form-control" id="exampleFormControlSelect1" name="flower">
+	      {{#each data_flower}}
+	      <option value="{{this.id}}">{{this.name}}</option>
+	      {{/each}}
+	    </select>
+
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlSelect2">Название цвета</label>
+	    <select class="form-control" id="exampleFormControlSelect2" name="colour">
+	      {{#each data_color}}
+	      <option value="{{this.id}}">{{this.name}}</option>
+	      {{/each}}
+	    </select>
+
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlSelect3">Название бренда</label>
+	    <select class="form-control" id="exampleFormControlSelect3" name="brand">
+	      {{#each data_brand}}
+	      <option value="{{this.id}}">{{this.name}}</option>
+	      {{/each}}
+	    </select>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlSelect4">Высота цветка</label>
+	    <select class="form-control" id="exampleFormControlSelect4" name="heigh">
+	      {{#each data_heigh}}
+	      <option value="{{this.id}}">{{this.height}}</option>
+	      {{/each}}
+	    </select>
+
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlSelect5">Название группы цветка</label>
+	    <select class="form-control" id="exampleFormControlSelect5" name="Types">
+	      {{#each data_type}}
+	      <option value="{{this.id}}">{{this.name}}</option>
+	      {{/each}}
+	    </select>
+
+	  </div>
+
+	  </div>
+
+	  	  <div class="form-group">
+
+	    <label for="exampleFormControlInput6">Цена</label>
+	    {{#each param}}
+	    <input type="" class="form-control" onkeyup="var numbers = /[0-9]/g; if (this.value != '' && this.value.match(numbers)){ add.style.display='block' }  else {add.style.display = 'none'}" id="exampleFormControlInput6" autocomplete="off" name="cost" placeholder="Цена (ТОЛЬКО ЦИФРЫ!!!!!)" value="{{this.cost}}">
+	    
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlTextarea1">Описание</label>
+	    <textarea class="form-control" id="exampleFormControlTextarea1" name="descipt" rows="3">{{this.description}}</textarea>
+	  </div>
+	  {{/each}}
+	  <button id="add" type="submit">Изменить</button>
+	</form>
+
+	<form id="formElement">
+		<div class="form-group">
+	    <label for="exampleFormControlSelect1">Название цветка</label>
+	    <select class="form-control" id="exampleFormControlSelect1" name="flower">
+	      {{#each param}}
+	      <option value="{{this.id}}">{{this.sort}}</option>
+	      {{/each}}
+	    </select>
+		 	Картинка: <input type="file" name="picture" accept="image/*">
+			<input type="submit">
+		</div>
+	</form>	
+	  <script>
+		  formElement.onsubmit = async (e) => {
+		    e.preventDefault();
+
+		    let response = await fetch('/kjuhhjokjh', {
+		      method: 'POST',
+		      body: new FormData(formElement)
+		    });
+
+		    let result = await response.json();
+
+		    alert(result.message);
+		  };
+	</script>
+</div>
+
+	<a class="btn btn-outline-danger" href="/oejkhngwtg">Ввести недостающее значение</a>
+	<a class="btn btn-outline-success" href="/adminppAnusel">Панель администратора</a>
+	<a class="btn btn-outline-warning" href="/dataTab32le">Посмотреть таблицу (отмена)</a>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

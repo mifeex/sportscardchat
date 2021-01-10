@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+<div class="">
+      <table id="dataTable" class="table thead-light">
+       <thead>
+          <tr>
+            <th scope="col">Действия по ум.:</th>
+            <th scope="col">id:</th>
+            <th scope="col">Сорт:</th>
+            <th scope="col">Производитель:</th>
+            <th scope="col">Цвет:</th>
+            <th scope="col">Форма цветка:</th>
+            <th scope="col">Высота:</th>
+            <th scope="col">Группа:</th>
+            <th scope="col">Картинка:</th>
+          </tr>
+        </thead>
+{{#each param }}
+        <tbody>        
+           <tr>
+
+            <td><a class="link" href="delete-value-from-table-{{this.id}}">Удалить</a></br> <a class="link" href="/change-value-in-table-{{this.id}}">Изменить</a></td>
+            <td><a class="link"> {{this.id}}</a></td>
+            <td><a class="link"> {{this.sort}}</a></td>
+            <td><a class="link"> {{this.brand}}</a></td>
+            <td><a class="link"> {{this.color}}</a></td>
+            <td><a class="link"> {{this.flower_form}}</a></td>
+            <td><a class="link"> {{this.heigh}}</a> см</td>
+            <td><a class="link"> {{this.rose_type}}</a></td>
+            
+            <td class="img-in-table"> 
+              <img class="card-img-top img" src="" alt="{{this.sort}}"> 
+              <a style="" data-img="_1.jpg" data-id="{{this.id}}" class="p" data-colour="{{this.color}}" data-rose-type="{{this.flower_form}}"></a>
+            </td>
+          </tr>
+{{/each}}
+        </tbody>
+      </table>
+</div>
+
+<a class="btn btn-outline-success" href="/adminppAnusel">Панель администратора</a>
+<a class="btn btn-outline-danger" href="/oejkhngwtg">Ввести недостающее значение</a>
+</html>

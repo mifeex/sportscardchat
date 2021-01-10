@@ -1,0 +1,65 @@
+<div class="sidenav">
+<form id="form2" action="/param" method="get">
+  <button class="dropdown-btn text-uppercase text-primary data_button" onclick="event.preventDefault()">Бренд
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  {{#each data_brand}}
+	  <input type="checkbox" name="brand" value="{{this.id}}" class="form-check-input param" id="{{this.name}}">
+	  <label class="form-check-label text-uppercase text-primary" for="{{this.name}}">{{this.name}}</label>
+  {{/each}}
+  </div>
+
+  <button class="dropdown-btn text-uppercase text-primary data_button" onclick="event.preventDefault()">Цвет
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  {{#each data_color}}
+	  <input type="checkbox" name="color" value="{{this.id}}" class="form-check-input param" id="{{this.name}}">
+	  <label class="form-check-label text-uppercase text-primary" for="{{this.name}}">{{this.name}}</label>
+  {{/each}}
+  </div>
+
+  <button class="dropdown-btn text-uppercase text-primary data_button" onclick="event.preventDefault()">Форма цветка
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  {{#each data_flower}}
+	  <input type="checkbox" name="flower_form" value="{{this.id}}" class="form-check-input param" id="{{this.name}}">
+	  <label class="form-check-label text-uppercase text-primary" for="{{this.name}}">{{this.name}}</label>
+  {{/each}}
+  </div>
+
+  <button class="dropdown-btn text-uppercase text-primary data_button" onclick="event.preventDefault()">Высота цветка
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  {{#each data_heigh}}
+    <input type="checkbox" name="heigh_form" value="{{this.id}}" class="form-check-input param" id="{{this.height}}">
+    <label class="form-check-label text-uppercase text-primary" for="{{this.height}}">{{this.height}}</label>
+  {{/each}}
+  </div>
+
+  <button class="dropdown-btn text-uppercase text-primary data_button" onclick="event.preventDefault()">Группа цветка
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  {{#each data_type}}
+    <input type="checkbox" name="Types" value="{{this.id}}" class="form-check-input param" id="{{this.name}}">
+    <label class="form-check-label text-uppercase text-primary" for="{{this.name}}">{{this.name}}</label>
+  {{/each}}
+  </div>
+
+  <div id="cost">
+    <input type="range" class="custom-range" id="customRange" name="cost" min="300" max="2500" step="50" value="1250">
+    <label class="form-check-label text-uppercase text-primary" id="labelRange" for="{{this.name}}">1250 рублей</label>
+  </div>
+
+  </form>
+
+  <div>
+    <input type="checkbox" class="custom-checkbox checkBox" id="checkBox"> Скрыть поиск по цене
+  </div>
+
+  <button class="btn btn-outline-primary" onclick="form2.submit()" id="button">Искать</button>   	
+</div>
